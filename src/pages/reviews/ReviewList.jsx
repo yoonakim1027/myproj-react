@@ -55,30 +55,19 @@ function PageReviewList() {
 
     Axios.delete(url)
       .then(() => {
-        console.log('삭제성공'); // then 호출만으로 성공을 알 수 있음
-        setReviewList((prevReviewList) => {
-          // prevReviewList 배열
-          // 매 순회마다 배열을 가져옴
-          return prevReviewList.filter((review) => {
-            // 중괄호!! 꼭 리턴
-            // arrow function + 중괄호 -> return 값 필요
-            // 문자열, 숫자열 끼리의 비교가 안전!
-            return review.id !== deletingReviewId;
-          }); // 삭제될 애들이 아닌애들만 남게 ~
-
-          // return 없이 ~
-          // setReviewList((prevReviewList)=>prevReviewList.filter(review)=> review.id ===deletingReviewId)
-        });
+        console.log('삭제 성공');
+        // 선택지 #1) 삭제된 항목만 상탯값에서 제거
+        setReviewList((prevReviewList) =>
+          prevReviewList.filter((review) => review.id !== deletingReviewId),
+        );
+        // 선택지 #2) 전체를 새로고침
       })
       .catch((error) => {
-        setError(error); // 에러를 남기는 상탯값 -> 에러 날 때에는 할 게 딱히 없음
+        setError(error);
       })
       .finally(() => {
         setLoading(false);
       });
-    // 에러
-
-    console.log('Deleting', deletingReview);
   };
 
   return (
