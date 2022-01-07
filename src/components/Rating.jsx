@@ -4,7 +4,11 @@ function Rating({ score }) {
       <ul className="flex">
         {[0, 1, 2, 3, 4].map((index) => {
           // arrow다음의 중괄호 -> 그럼 무조건 리턴이 있어야함
-          return <li>{index < score ? <FilledStar /> : <EmptyStar />}</li>;
+          return (
+            <li key={index}>
+              {index < score ? <FilledStar /> : <EmptyStar />}
+            </li>
+          );
         })}
       </ul>
     </div>
