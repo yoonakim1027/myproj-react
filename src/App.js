@@ -5,6 +5,8 @@ import Login from 'pages/accounts/Login';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import TopNav from 'components/TopNav';
 
+import './App.css';
+
 function App() {
   return (
     <div className="app">
@@ -18,5 +20,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
