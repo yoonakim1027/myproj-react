@@ -1,12 +1,11 @@
-import './App.css';
-import ReviewList from 'pages/reviews/ReviewList';
-import Profile from 'pages/accounts/profile';
-import Login from 'pages/accounts/Login';
-import { Route, Routes, Navigate } from 'react-router-dom';
 import TopNav from 'components/TopNav';
+import Login from 'pages/accounts/Login';
+import Profile from 'pages/accounts/Profile';
+import Components from 'pages/examples/Components';
+import ReviewList from 'pages/reviews/ReviewList';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import './App.css';
-import Components from 'pages/examples/Components';
 
 function App() {
   return (
@@ -22,4 +21,5 @@ function App() {
     </div>
   );
 }
+
 export default App;

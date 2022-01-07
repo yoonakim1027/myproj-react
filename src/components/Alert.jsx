@@ -2,10 +2,12 @@
 
 import Check from './icons/Check';
 import Info from './icons/Info';
+import Danger from './icons/Danger';
 
 const MAPPING = {
   info: ['blue', <Info />],
   success: ['green', <Check />],
+  danger: ['red', <Danger />],
 };
 
 function Alert({ type, message }) {
@@ -15,7 +17,10 @@ function Alert({ type, message }) {
 
   return (
     <div
-      className={`bg-${colorCode}-100 rounded-lg py-5 px-6 mb-3 text-base text-${colorCode}-700 inline-flex items-center w-full`}
+      className={`bg-${colorCode}-100 
+      rounded-lg 
+      py-5 px-6 mb-3 
+      text-base text-${colorCode}-700 inline-flex items-center w-full`}
       role="alert"
     >
       <span className="mr-2">{icon}</span>
@@ -24,9 +29,15 @@ function Alert({ type, message }) {
   );
 }
 
+// 사용하는 클래스 네임이 사용될 수 있도록 셋팅한 것 .
+
 function Cheat() {
   return (
-    <div className="bg-blue-100 text-blue-700 bg-green-100 text-green-700" />
+    <div
+      className="bg-blue-100 text-blue-700
+     bg-green-100 text-green-700
+      bg-red-100 text-red-700"
+    />
   );
 }
 
