@@ -6,7 +6,7 @@ function Rating({ score }) {
           // arrow다음의 중괄호 -> 그럼 무조건 리턴이 있어야함
           return (
             <li key={index}>
-              {index < score ? <FilledStar /> : <EmptyStar />}
+              {index < score ? <EmptyStar /> : <FilledStar />}
             </li>
           );
         })}
