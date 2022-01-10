@@ -19,24 +19,27 @@ function PageReviewForm() {
 
   // 컴포넌트가 한번 만들어졌을 때 딱 한 번 호출되는 함수
   // 요청될때 보면? /슬러시 뒤에 번호가 붙음
-  useEffect(() => {
-    setLoading(true);
-    setError(null);
 
-    const url = `http://localhost:8000/shop/api/reviews/${reviewId}`;
-    //통신이 항상 성공하는 것이 아니다 !!
-    Axios.get(url)
-      .then((response) => {
-        // 응답에 모든 필드 값이 다 있음
-        setFieldValues(response.data);
-      })
-      .catch((e) => {
+  // * asncy 함수 사용 하려면 ? 별도로 함수를 만들어줘야함
+  useEffect(() => {
+    const fn = async () => {
+      setLoading(true);
+      setError(null);
+
+      const url = `http://localhost:8000/shop/api/reviews/${reviewId}`;
+
+      try {
+        const response = await Axios.get(url);
+        setFieldValues(response.datat);
+      } catch (e) {
         setError(e);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [reviewId, setFieldValues]); // [] 어떤 값이 변경이 되면 ? 그 변경되는 값은 무조건 상탯값이어야 한다
+      }
+      setLoading(false);
+    };
+    fn();
+  }, [reviewId, setFieldValues]);
+
+  // [] 어떤 값이 변경이 되면 ? 그 변경되는 값은 무조건 상탯값이어야 한다
   // 상탯값을 내부에서 참고 하고 있는데~ 왜 안썼니~
 
   // 어떤 상탯값이 변경이되면 이 함수가 자동으로 호출이 된다
