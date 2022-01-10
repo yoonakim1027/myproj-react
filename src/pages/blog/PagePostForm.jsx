@@ -1,60 +1,60 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import Axios from 'axios';
 import DebugStates from 'components/DebugStates';
-import ReviewForm from 'components/ReviewForm';
 import useFieldValues from 'hooks/useFieldValues';
 import { useEffect, useState } from 'react/cjs/react.development';
+import PostForm from 'components/blog/PostForm';
 
-function PageReviewForm() {
+function PagePostForm() {
   // 상탯값 정의. 훅 호출
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
-  const { reviewId } = useParams();
+  const { postId } = useParams();
   const { fieldValues, handleFieldChange, clearFieldValues, setFieldValues } =
     useFieldValues({
-      score: 5,
+      title: '',
       content: '',
     });
 
   useEffect(() => {
-    const fetchReview = async () => {
+    const fetchPost = async () => {
       setLoading(true);
       setError(null);
 
-      const url = `http://localhost:8000/shop/api/reviews/${reviewId}/`;
+      const url = ` http://localhost:8000/blog/api/posts/${postId}/`;
       try {
         const response = await Axios.get(url);
         setFieldValues(response.data);
-      } catch (e) {
-        setError(e);
+      } catch (error) {
+        setError(error);
       }
       setLoading(false);
     };
-    if (reviewId) fetchReview();
+    if (postId) fetchPost();
     else clearFieldValues();
-  }, [reviewId]);
+  }, [postId]);
 
   // 다양한 함수를 정의
-  const saveReview = async () => {
+  const savePost = async () => {
     setLoading(true);
     setError(null);
 
-    const url = !reviewId
-      ? 'http://localhost:8000/shop/api/reviews/'
-      : `http://localhost:8000/shop/api/reviews/${reviewId}/`;
+    const url = !postId
+      ? 'http://localhost:8000/blog/api/posts/'
+      : `http://localhost:8000/blog/api/posts/${postId}/`;
 
     try {
-      if (!reviewId) {
+      if (!postId) {
         await Axios.post(url, fieldValues);
       } else {
-        await Axios.put(url, fieldValues);
+        await Axios.patch(url, fieldValues);
       }
-      navigate('/reviews/');
-    } catch (e) {
-      setError(e);
-      console.error(e);
+      navigate('/blog/');
+    } catch (eroor) {
+      setError(error);
+      console.error(error);
     }
 
     setLoading(false);
@@ -64,18 +64,18 @@ function PageReviewForm() {
   return (
     <div>
       <h2>
-        ReviewForm
-        {reviewId ? '수정' : '생성'}
+        Post Form
+        {postId ? '수정' : '생성'}
       </h2>
-      <ReviewForm
+      <PostForm
         fieldValues={fieldValues}
         handleFieldChange={handleFieldChange}
-        handleSubmit={saveReview}
+        handleSubmit={savePost}
         loading={loading}
       />
-      <DebugStates reviewId={reviewId} fieldValues={fieldValues} />
+      <DebugStates postId={postId} fieldValues={fieldValues} />
     </div>
   );
 }
 
-export default PageReviewForm;
+export default PagePostForm;
