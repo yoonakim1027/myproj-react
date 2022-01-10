@@ -13,7 +13,7 @@ function ReviewForm({ fieldValues, handleFieldChange, handleSubmit, loading }) {
 
   return (
     <div>
-      {loading && '.....loading'}
+      {loading && 'Loading ...'}
       <div>
         <select
           name="score"
