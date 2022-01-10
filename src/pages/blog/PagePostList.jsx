@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PostForm from 'components/blog/PostForm';
 import PagePostDetail from './PagePostDetail';
+import PostDetail from 'components/blog/PostDetail';
 
 function PagePostList() {
   const [loading, setLoading] = useState(false);
@@ -62,6 +63,12 @@ function PagePostList() {
       });
   };
 
+  //수정
+  const editPost = (editingPost) => {
+    navigate(`/blog/${editingPost.id}/edit/`);
+  };
+
+  //디테일
   const detailPost = (detailingPost) => {
     const { id: detailingPostId } = detailingPost;
     const url = `http://localhost:8000/blog/api/posts/${detailingPostId}/`;
@@ -115,9 +122,8 @@ function PagePostList() {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               key={post.id}
               post={post}
-              handleEdit={() => navigate(`/blog/${post.id}/edit/`)}
+              handleEdit={() => editPost(post)}
               handleDelete={() => deletePost(post)}
-              onClick={() => navigate(`/blog/${post.id}/detail/`)}
             />
           ))}
         </div>

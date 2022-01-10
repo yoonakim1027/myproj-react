@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function PostList({ post, onClick, handleEdit, handleDelete }) {
   const [showMenu, setShowMenu] = useState(false);
@@ -6,6 +7,8 @@ function PostList({ post, onClick, handleEdit, handleDelete }) {
   // TODO : handleEdit/handleDelete 호출에 대한 방어적 코드를 작성
   // 조건부 렌더링 필요
   // {handleEdif &&} ~
+
+  const navigate = useNavigate();
 
   const handleClickedEditButton = () => {
     if (handleEdit) {
@@ -47,7 +50,15 @@ function PostList({ post, onClick, handleEdit, handleDelete }) {
           </span>
         </div>
       )}
-      {title}
+
+      <span
+        onClick={() => {
+          navigate(`/blog/${post.id}/`);
+        }}
+        className="px-2 py-1 rounded hover:bg-blue-200 cursor-pointer"
+      >
+        {title}
+      </span>
     </div>
   );
 }

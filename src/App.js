@@ -4,6 +4,10 @@ import PostList from 'components/blog/PostList';
 import TopNav from 'components/TopNav';
 import Login from 'pages/accounts/Login';
 import Profile from 'pages/accounts/Profile';
+
+import PagePostDetail from 'pages/blog/PagePostDetail';
+import PagePostForm from 'pages/blog/PagePostForm';
+import PagePostList from 'pages/blog/PagePostList';
 import Components from 'pages/examples/Components';
 import ReviewForm from 'pages/reviews/ReviewForm';
 import ReviewList from 'pages/reviews/ReviewList';
@@ -22,9 +26,10 @@ function App() {
         <Route path="/reviews/" element={<ReviewList />} />
         <Route path="/examples/components/" element={<Components />} />
         <Route path="/reviews/new/" element={<ReviewForm />} />
-        <Route path="/blog/" element={<PostList />} />
-        <Route path="/blog/:postId" element={<PostDetail />} />
-        <Route path="/blog/:postId/edit/" element={<PostForm />} />
+        <Route path="/blog/" element={<PagePostList />} />
+        <Route path="/blog/:postId/" element={<PagePostDetail />} />
+        <Route path="/blog/:postId/edit/" element={<PagePostForm />} />
+        <Route path="/blog/new/" element={<PagePostForm />} />
       </Routes>
     </div>
   );
