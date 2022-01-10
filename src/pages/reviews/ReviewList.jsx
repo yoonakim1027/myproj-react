@@ -3,7 +3,6 @@ import DebugStates from 'components/DebugStates';
 import Review from 'components/Review';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ReviewForm from './ReviewForm';
 
 function PageReviewList() {
   const [loading, setLoading] = useState(false);
@@ -62,31 +61,33 @@ function PageReviewList() {
     <div>
       <h2>Review List</h2>
 
-      {loading && <div>Loading...</div>}
+      {loading && <div>Loading ...</div>}
       {error && <div>통신 중에 오류가 발생했습니다.</div>}
 
       <button
         onClick={() => refetch()}
-        className="bg-yellow-400 hover:bg-red-300"
+        className="bg-yellow-400 hover:bg-red-400 mr-1"
       >
         새로고침
       </button>
 
       <button
         onClick={() => navigate('/reviews/new/')}
-        className="bg-blue-400 cursor-pointer"
+        className="bg-blue-400 hover:bg-slate-400"
       >
-        새로 쓰기
+        새 리뷰
       </button>
 
-      {reviewList.map((review) => (
-        <Review
-          key={review.id}
-          review={review}
-          handleDelete={() => deleteReview(review)}
-          // 삭제를 누르면, deleteReview를 호출하면서 리뷰 객체를 넘김
-        />
-      ))}
+      <div className="">
+        {reviewList.map((review) => (
+          <Review
+            key={review.id}
+            review={review}
+            handleEdit={() => navigate(`/reviews/${review.id}/edit/`)}
+            handleDelete={() => deleteReview(review)}
+          />
+        ))}
+      </div>
 
       <hr />
       <DebugStates loading={loading} error={error} reviewList={reviewList} />
