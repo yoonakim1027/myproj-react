@@ -1,11 +1,11 @@
-import Axios from 'axios';
 import DebugStates from 'components/DebugStates';
 import PostList from 'components/blog/PostList';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import PostForm from 'components/blog/PostForm';
-import PagePostDetail from './PagePostDetail';
-import PostDetail from 'components/blog/PostDetail';
+import { axiosInstance } from 'api/base';
+// import PostForm from 'components/blog/PostForm';
+// import PagePostDetail from './PagePostDetail';
+// import PostDetail from 'components/blog/PostDetail';
 
 function PagePostList() {
   const [loading, setLoading] = useState(false);
@@ -24,9 +24,10 @@ function PagePostList() {
     setLoading(true);
     setError(null);
 
-    const url = 'http://localhost:8000/blog/api/posts/';
+    const url = '/blog/api/posts/';
     // Promise 객체
-    Axios.get(url)
+    axiosInstance
+      .get(url)
       .then(({ data }) => {
         setPostList(data);
       })
@@ -41,12 +42,13 @@ function PagePostList() {
 
   const deletePost = (deletingPost) => {
     const { id: deletingPostId } = deletingPost;
-    const url = `http://localhost:8000/blog/api/posts/${deletingPostId}/`;
+    const url = `/blog/api/posts/${deletingPostId}/`;
 
     setLoading(true);
     setError(null);
 
-    Axios.delete(url)
+    axiosInstance
+      .delete(url)
       .then(() => {
         console.log('삭제 성공');
         // 선택지 #1) 삭제된 항목만 상탯값에서 제거
@@ -71,12 +73,13 @@ function PagePostList() {
   //디테일
   const detailPost = (detailingPost) => {
     const { id: detailingPostId } = detailingPost;
-    const url = `http://localhost:8000/blog/api/posts/${detailingPostId}/`;
+    const url = `/blog/api/posts/${detailingPostId}/`;
 
     setLoading(true);
     setError(null);
 
-    Axios.get(url)
+    axiosInstance
+      .get(url)
       .then(() => {
         console.log('불러오기 성공');
         setPostList((prevPostList) =>

@@ -1,8 +1,8 @@
-import Axios from 'axios';
 import PostDetail from 'components/blog/PostDetail';
 import DebugStates from 'components/DebugStates';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { axiosInstance } from 'api/base';
 
 function PagePostDetail() {
   const [loading, setLoading] = useState(false);
@@ -21,9 +21,10 @@ function PagePostDetail() {
     setLoading(true);
     setError(null);
 
-    const url = `http://localhost:8000/blog/api/posts/${postId}`;
+    const url = `/blog/api/posts/${postId}`;
     // Promise 객체
-    Axios.get(url)
+    axiosInstance
+      .get(url)
       .then(({ data }) => {
         setViewPost(data);
       })

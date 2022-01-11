@@ -1,9 +1,9 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import Axios from 'axios';
 import DebugStates from 'components/DebugStates';
 import useFieldValues from 'hooks/useFieldValues';
 import { useEffect, useState } from 'react/cjs/react.development';
 import PostForm from 'components/blog/PostForm';
+import { axiosInstance } from 'api/base';
 
 function PagePostForm() {
   // 상탯값 정의. 훅 호출
@@ -23,9 +23,9 @@ function PagePostForm() {
       setLoading(true);
       setError(null);
 
-      const url = ` http://localhost:8000/blog/api/posts/${postId}/`;
+      const url = `/blog/api/posts/${postId}/`;
       try {
-        const response = await Axios.get(url);
+        const response = await axiosInstance.get(url);
         setFieldValues(response.data);
       } catch (error) {
         setError(error);
@@ -41,15 +41,13 @@ function PagePostForm() {
     setLoading(true);
     setError(null);
 
-    const url = !postId
-      ? 'http://localhost:8000/blog/api/posts/'
-      : `http://localhost:8000/blog/api/posts/${postId}/`;
+    const url = !postId ? '/blog/api/posts/' : `/blog/api/posts/${postId}/`;
 
     try {
       if (!postId) {
-        await Axios.post(url, fieldValues);
+        await axiosInstance.post(url, fieldValues);
       } else {
-        await Axios.patch(url, fieldValues);
+        await axiosInstance.patch(url, fieldValues);
       }
       navigate('/blog/');
     } catch (eroor) {
