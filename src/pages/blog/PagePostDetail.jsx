@@ -44,18 +44,21 @@ function PagePostDetail() {
       {error && <div>통신 중에 오류가 발생했습니다.</div>}
 
       <div>
-        <div className="block bg-pink-200 text-center py-2 mb-2">
+        <div className="bg-white shadow-md rounded border border-gray-400 my-3 p-2 ">
           {viewPost.title}
         </div>
         <img src="https://placeimg.com/640/480/animals" alt="" />
-        <div className="block bg-yellow-100 px-2 py-1">{viewPost.content}</div>
+        <div className="bg-blue-50 rounded border border-gray-400 my-3 p-2 ">
+          {viewPost.content}
+        </div>
       </div>
 
       <hr />
       <br></br>
+
       <button
         onClick={() => navigate(`/blog/`)}
-        className=" bg-blue-400 hover:bg-red-400 mr-1"
+        className="shadow bg-blue-400 hover:bg-blue-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
       >
         뒤로가기
       </button>

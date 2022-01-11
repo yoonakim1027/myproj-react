@@ -24,8 +24,6 @@ function Clock() {
 
   return (
     <div className="clock-wrapper">
-      <h2>시계</h2>
-
       <div class="clock">
         <p class="date">
           {date.getFullYear()}-{date.getMonth() + 1}-{date.getDate()}{' '}
@@ -36,7 +34,6 @@ function Clock() {
           {currentTime}
           {/* {date.getHours()}:{date.getMinutes()}:{date.getSeconds()} */}
         </p>
-        <p class="text">Powered by React.js</p>
       </div>
     </div>
   );

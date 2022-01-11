@@ -3,6 +3,7 @@ import PostList from 'components/blog/PostList';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { axiosInstance } from 'api/base';
+import Clock from 'pages/examples/Clock';
 // import PostForm from 'components/blog/PostForm';
 // import PagePostDetail from './PagePostDetail';
 // import PostDetail from 'components/blog/PostDetail';
@@ -114,6 +115,7 @@ function PagePostList() {
         <hr />
         <br></br>
         <DebugStates loading={loading} error={error} postList={postList} />
+        
       </div>
     </>
   );
