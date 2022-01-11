@@ -18,6 +18,8 @@ function PagePostForm() {
       content: '',
     });
 
+  const [errorMessages, setErrorMessages] = useState({});
+
   useEffect(() => {
     const fetchPost = async () => {
       setLoading(true);
@@ -40,6 +42,7 @@ function PagePostForm() {
   const savePost = async () => {
     setLoading(true);
     setError(null);
+    setErrorMessages({});
 
     const url = !postId ? '/blog/api/posts/' : `/blog/api/posts/${postId}/`;
 
@@ -53,6 +56,7 @@ function PagePostForm() {
     } catch (eroor) {
       setError(error);
       console.error(error);
+      setErrorMessages(error.response.data);
     }
 
     setLoading(false);
@@ -71,11 +75,16 @@ function PagePostForm() {
 
       <PostForm
         fieldValues={fieldValues}
+        errorMessages={errorMessages}
         handleFieldChange={handleFieldChange}
         handleSubmit={savePost}
         loading={loading}
       />
-      <DebugStates postId={postId} fieldValues={fieldValues} />
+      <DebugStates
+        postId={postId}
+        fieldValues={fieldValues}
+        errorMessages={errorMessages}
+      />
     </div>
   );
 }

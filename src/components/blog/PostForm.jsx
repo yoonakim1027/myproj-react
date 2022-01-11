@@ -2,7 +2,13 @@
 // handleFieldChange : 각 필드 값이 변화 시에 호출
 // handleSubmit : 인자없는 함수. submit 시에 호출.
 
-function PostForm({ fieldValues, handleFieldChange, handleSubmit, loading }) {
+function PostForm({
+  errorMessages,
+  fieldValues,
+  handleFieldChange,
+  handleSubmit,
+  loading,
+}) {
   const handleClickedSubmitButton = () => {
     if (handleSubmit) {
       handleSubmit();
@@ -25,6 +31,7 @@ function PostForm({ fieldValues, handleFieldChange, handleSubmit, loading }) {
             placeholder="title"
             disabled={loading}
           />
+          <div className="text-red-500">{errorMessages.title}</div>
         </label>
         <p className="text-red-500 text-xs italic">
           Please fill out this field.
@@ -40,6 +47,7 @@ function PostForm({ fieldValues, handleFieldChange, handleSubmit, loading }) {
             placeholder="content"
             disabled={loading}
           />
+          <div className="text-red-500">{errorMessages.content}</div>
         </label>
         <p className="text-red-500 text-xs italic">
           Please fill out this field.
