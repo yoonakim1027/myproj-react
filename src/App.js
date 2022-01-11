@@ -15,6 +15,8 @@ import ReviewList from 'pages/reviews/ReviewList';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import useWindowWidth from 'pages/examples/useWindowWidth';
 import './App.css';
+import CssModule from 'pages/examples/CssModule';
+import CssInJs from 'pages/examples/CssInJs';
 
 function App() {
   const windowWidth = useWindowWidth();
@@ -34,6 +36,8 @@ function App() {
           <Route path="/blog/:postId/" element={<PagePostDetail />} />
           <Route path="/blog/:postId/edit/" element={<PagePostForm />} />
           <Route path="/blog/new/" element={<PagePostForm />} />
+          <Route path="/examples/cssmodule/" element={<CssModule />} />
+          <Route path="/examples/cssinjs/" element={<CssInJs />} />
         </Routes>
         <hr />
         윈도우 가로크기 : {windowWidth}px
