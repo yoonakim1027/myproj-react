@@ -17,6 +17,7 @@ import useWindowWidth from 'pages/examples/useWindowWidth';
 import './App.css';
 import CssModule from 'pages/examples/CssModule';
 import CssInJs from 'pages/examples/CssInJs';
+import ContextAPISample from 'pages/examples/ContextAPISample';
 
 function App() {
   const windowWidth = useWindowWidth();
@@ -38,6 +39,10 @@ function App() {
           <Route path="/blog/new/" element={<PagePostForm />} />
           <Route path="/examples/cssmodule/" element={<CssModule />} />
           <Route path="/examples/cssinjs/" element={<CssInJs />} />
+          <Route
+            path="/examples/contextapisample/"
+            element={<ContextAPISample />}
+          />
         </Routes>
         <hr />
         윈도우 가로크기 : {windowWidth}px
