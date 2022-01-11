@@ -13,10 +13,12 @@ import Components from 'pages/examples/Components';
 import ReviewForm from 'pages/reviews/ReviewForm';
 import ReviewList from 'pages/reviews/ReviewList';
 import { Navigate, Route, Routes } from 'react-router-dom';
-
+import useWindowWidth from 'pages/examples/useWindowWidth';
 import './App.css';
 
 function App() {
+  const windowWidth = useWindowWidth();
+
   return (
     <>
       <div className="app">
@@ -33,6 +35,8 @@ function App() {
           <Route path="/blog/:postId/edit/" element={<PagePostForm />} />
           <Route path="/blog/new/" element={<PagePostForm />} />
         </Routes>
+        <hr />
+        윈도우 가로크기 : {windowWidth}px
       </div>
       <Routes>
         <Route path="/examples/clock/" element={<Clock />} />
