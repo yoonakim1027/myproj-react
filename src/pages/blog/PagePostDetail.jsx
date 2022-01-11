@@ -1,4 +1,3 @@
-import PostDetail from 'components/blog/PostDetail';
 import DebugStates from 'components/DebugStates';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -7,7 +6,7 @@ import { axiosInstance } from 'api/base';
 function PagePostDetail() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [postList, setPostList] = useState([]);
+
   const [viewPost, setViewPost] = useState([]);
 
   const navigate = useNavigate();

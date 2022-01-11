@@ -12,42 +12,51 @@ function PostForm({ fieldValues, handleFieldChange, handleSubmit, loading }) {
   };
 
   return (
-    <div>
+    <div className="block">
       {loading && 'Loading ...'}
-      <div>
-        <label className="text-m flex top-1 right-0 mr-2 bottom-1">
-          제목
+      <div className="w-full mb-6">
+        <label className="block uppercase tracking-wide text-gray-700 text-lg font-bold mb-2">
+          Titie
           <textarea
             name="title"
             value={fieldValues.title}
             onChange={handleFieldChange}
-            className="bg-gray-100 border  bottom-1 border-gray-400"
+            className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white "
+            placeholder="title"
             disabled={loading}
           />
         </label>
-      </div>
-      <div>
-        <label className="text-m flex top-1 mr-2 right-0">
-          내용
+        <p className="text-red-500 text-xs italic">
+          Please fill out this field.
+        </p>
+        <br></br>
+        <label className="block uppercase tracking-wide text-gray-700 text-lg font-bold mb-2">
+          Content
           <textarea
             name="content"
             value={fieldValues.content}
             onChange={handleFieldChange}
-            className="bg-gray-100 border border-gray-400"
+            className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-500 rounded mb-3 leading-loose focus:outline-none focus:bg-white pb-40 pl-2"
+            placeholder="content"
             disabled={loading}
           />
         </label>
+        <p className="text-red-500 text-xs italic">
+          Please fill out this field.
+        </p>
       </div>
+      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0"></div>
 
-      <div>
+      <div className="text-center">
         <button
-          className="bg-blue-100 cursor-pointer"
+          className=" shadow bg-pink-300 hover:bg-pink-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-5 md:mb-0 rounded cursor-pointer"
           onClick={() => handleClickedSubmitButton()}
           disabled={loading}
         >
           {loading && '로딩 아이콘'}
           저장하기
         </button>
+        <br></br>
       </div>
     </div>
   );

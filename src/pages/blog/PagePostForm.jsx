@@ -60,11 +60,15 @@ function PagePostForm() {
 
   // 표현 by jsx
   return (
-    <div>
-      <h2>
+    <div className="w-full px-3 mb-6">
+      <h2 className="italic text-m">
         Post Form
-        {postId ? '수정' : '생성'}
+        <br></br>
+        {postId ? ': 수정하기' : ': 생성하기'}
       </h2>
+      <br></br>
+      <hr />
+
       <PostForm
         fieldValues={fieldValues}
         handleFieldChange={handleFieldChange}

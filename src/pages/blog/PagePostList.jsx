@@ -70,54 +70,34 @@ function PagePostList() {
     navigate(`/blog/${editingPost.id}/edit/`);
   };
 
-  //디테일
-  const detailPost = (detailingPost) => {
-    const { id: detailingPostId } = detailingPost;
-    const url = `/blog/api/posts/${detailingPostId}/`;
-
-    setLoading(true);
-    setError(null);
-
-    axiosInstance
-      .get(url)
-      .then(() => {
-        console.log('불러오기 성공');
-        setPostList((prevPostList) =>
-          prevPostList.filter((post) => post.id === detailingPostId),
-        );
-      })
-      .catch((error) => {
-        setError(error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
   return (
     <>
       <div>
-        <h2>Post List</h2>
+        <h2 className="text-xl md:w-32 lg:w-48 text-center italic">
+          Post List
+        </h2>
 
-        {loading && <div>Loading ...</div>}
+        {loading && <div className="italic">Loading ...</div>}
         {error && <div>통신 중에 오류가 발생했습니다.</div>}
-
-        <div>
+        <hr />
+        <br></br>
+        <div className="text-center">
           {!viewForm && (
             <button
               onClick={() => navigate('/blog/new/')}
-              className="bg-blue-400 hover:bg-slate-400"
+              className="shadow bg-purple-400 hover:bg-purple-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
             >
               새 포스팅
             </button>
           )}
+
+          <button
+            onClick={() => refetch()}
+            className="shadow bg-blue-400 hover:bg-blue-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+          >
+            새로고침
+          </button>
         </div>
-        <button
-          onClick={() => refetch()}
-          className="bg-yellow-400 hover:bg-red-400 mr-1"
-        >
-          새로고침
-        </button>
 
         <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           {postList.map((post) => (
@@ -132,6 +112,7 @@ function PagePostList() {
         </div>
 
         <hr />
+        <br></br>
         <DebugStates loading={loading} error={error} postList={postList} />
       </div>
     </>
