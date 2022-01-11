@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import './Clock.css';
 
+const WEEKDAYS = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+
 function Clock() {
   const [date, setDate] = useState(new Date());
 
@@ -21,8 +23,8 @@ function Clock() {
     <div className="clock-wrapper">
       <h2>시계</h2>
       <div className="clock">
-        <p className="date">2021-10-05 TUE</p>
-        <p className="time">{date.toISOString().slice(11, 19)}</p>
+        <p className="date">{date.toLocaleDateString()}</p>
+        <p className="time">{date.toLocaleTimeString('en-us')}</p>
         <p className="text">Powered by React.js</p>
       </div>
     </div>
