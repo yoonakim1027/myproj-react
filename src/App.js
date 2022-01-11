@@ -8,6 +8,7 @@ import Profile from 'pages/accounts/Profile';
 import PagePostDetail from 'pages/blog/PagePostDetail';
 import PagePostForm from 'pages/blog/PagePostForm';
 import PagePostList from 'pages/blog/PagePostList';
+import Clock from 'pages/examples/Clock';
 import Components from 'pages/examples/Components';
 import ReviewForm from 'pages/reviews/ReviewForm';
 import ReviewList from 'pages/reviews/ReviewList';
@@ -17,21 +18,26 @@ import './App.css';
 
 function App() {
   return (
-    <div className="app">
-      <TopNav />
+    <>
+      <div className="app">
+        <TopNav />
+        <Routes>
+          <Route path="/" element={<Navigate to="/reviews/" />} />
+          <Route path="/accounts/login/" element={<Login />} />
+          <Route path="/accounts/profile/" element={<Profile />} />
+          <Route path="/reviews/" element={<ReviewList />} />
+          <Route path="/examples/components/" element={<Components />} />
+          <Route path="/reviews/new/" element={<ReviewForm />} />
+          <Route path="/blog/" element={<PagePostList />} />
+          <Route path="/blog/:postId/" element={<PagePostDetail />} />
+          <Route path="/blog/:postId/edit/" element={<PagePostForm />} />
+          <Route path="/blog/new/" element={<PagePostForm />} />
+        </Routes>
+      </div>
       <Routes>
-        <Route path="/" element={<Navigate to="/reviews/" />} />
-        <Route path="/accounts/login/" element={<Login />} />
-        <Route path="/accounts/profile/" element={<Profile />} />
-        <Route path="/reviews/" element={<ReviewList />} />
-        <Route path="/examples/components/" element={<Components />} />
-        <Route path="/reviews/new/" element={<ReviewForm />} />
-        <Route path="/blog/" element={<PagePostList />} />
-        <Route path="/blog/:postId/" element={<PagePostDetail />} />
-        <Route path="/blog/:postId/edit/" element={<PagePostForm />} />
-        <Route path="/blog/new/" element={<PagePostForm />} />
+        <Route path="/examples/clock/" element={<Clock />} />
       </Routes>
-    </div>
+    </>
   );
 }
 
