@@ -18,6 +18,7 @@ import './App.css';
 import CssModule from 'pages/examples/CssModule';
 import CssInJs from 'pages/examples/CssInJs';
 import ContextAPISample from 'pages/examples/ContextAPISample';
+import ContextApiSample2 from 'pages/examples/ContextAPISample2';
 
 function App() {
   const windowWidth = useWindowWidth();
@@ -40,7 +41,12 @@ function App() {
           <Route path="/examples/cssmodule/" element={<CssModule />} />
           <Route path="/examples/cssinjs/" element={<CssInJs />} />
           <Route
-            path="/examples/contextapisample/"
+            path="/examples/context-api-sample2/"
+            element={<ContextApiSample2 />}
+          />
+
+          <Route
+            path="/examples/context-api-sample/"
             element={<ContextAPISample />}
           />
         </Routes>
