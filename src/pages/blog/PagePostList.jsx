@@ -14,10 +14,10 @@ function PagePostList() {
         <h2 className="text-xl md:w-32 lg:w-48 text-center italic">
           Post List
         </h2>
+        <Button onClick={() => navigate('/blog/new/')}>새 글 쓰기</Button>
         <div>
           <PostList />
         </div>
-        <Button onClick={() => navigate('/blog/new/')}>새 글 쓰기</Button>
       </div>
     </>
   );

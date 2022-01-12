@@ -58,13 +58,18 @@ function PostDetail({ postId }) {
       )}
 
       <hr className="my-3" />
-      <div className="flex gap-4 mt-3 mb-10">
-        <Link to="/blog/" className="hover:text-red-300">
-          목록으로
-        </Link>
-        <Link to={`/blog/${postId}/edit/`} className="hover:text-red-400">
-          수정하기
-        </Link>
+      <div className="gap-5 mt-3 mb-10">
+        <Button type="purple">
+          <Link to="/blog/" className="hover:text-white-300">
+            목록으로
+          </Link>
+        </Button>
+        <Button>
+          <Link to={`/blog/${postId}/edit/`} className="hover:text-white-400">
+            수정하기
+          </Link>
+        </Button>
+
         <Button disabled={deleteLoading} onClick={handleDelete} type="pink">
           삭제하기
         </Button>
