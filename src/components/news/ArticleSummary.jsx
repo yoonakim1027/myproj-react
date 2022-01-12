@@ -10,7 +10,9 @@ function ArticleSummary({ article }) {
   return (
     <div>
       <h2>
-        요약 :<Link to={`/news/${article.id}/`}>{article.title} </Link>
+        <Link to={`/news/${article.id}/`}>
+          {article.id}. {article.title}
+        </Link>
       </h2>
     </div>
   );

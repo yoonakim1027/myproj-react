@@ -14,11 +14,14 @@ function ArticleList() {
 
   return (
     <div>
-      <h3>뉴스 기사 목록을 보여줄 것입니다.</h3>
-      {loading && '로딩 중 ...'}
-      {error && '로딩 중 에러가 발생했습니다.'}
-      {articleList &&
-        articleList.map((article) => <ArticleSummary article={article} />)}
+      <h3 className="text-xl md:w-32 lg:w-48 text-center italic">Head Line</h3>
+      <div className="bg-white shadow-md rounded border border-gray-400 my-3 p-2">
+        {loading && '로딩 중 ...'}
+        {error && '로딩 중 에러가 발생했습니다.'}
+        {articleList &&
+          articleList.map((article) => <ArticleSummary article={article} />)}
+      </div>
+
       <DebugStates articleList={articleList} loading={loading} error={error} />
     </div>
   );
