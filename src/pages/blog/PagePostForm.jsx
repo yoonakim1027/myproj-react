@@ -7,10 +7,10 @@ function PagePostForm() {
 
   return (
     <div className="w-full px-3 mb-6">
-      <h2 className="italic text-m">
+      <h2 className="text-m">
         Post Form
         <br></br>
-        {postId ? ': 수정하기' : ': 생성하기'}
+        {postId ? ': 🐱 수정하기' : ': 🐶 생성하기'}
       </h2>
       <hr />
 

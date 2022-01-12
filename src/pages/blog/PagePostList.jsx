@@ -1,8 +1,6 @@
-import DebugStates from 'components/DebugStates';
 import PostList from 'components/blog/PostList';
-import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { axiosInstance } from 'api/base';
+
 import Button from 'components/Button';
 
 function PagePostList() {
@@ -11,11 +9,14 @@ function PagePostList() {
   return (
     <>
       <div>
-        <h2 className="text-xl md:w-32 lg:w-48 text-center italic">
-          Post List
+        <hr />
+        <h2 className="my-3 text-xl md:w-32 lg:w-48 text-center">
+          🐼 Post List 🐰
         </h2>
-        <Button onClick={() => navigate('/blog/new/')}>새 글 쓰기</Button>
-        <div>
+        <div className="text-center">
+          <Button onClick={() => navigate('/blog/new/')}>새 글 쓰기</Button>
+        </div>
+        <div className="bg-white shadow-md rounded border border-gray-400 my-5 p-1">
           <PostList />
         </div>
       </div>

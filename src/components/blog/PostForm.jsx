@@ -39,13 +39,14 @@ function PostForm({ postId, handleDidSave }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    saveRequest({
-      data: fieldValues,
-    }).then((response) => {
-      const savedPost = response.data;
-      if (handleDidSave) handleDidSave(savedPost);
-    });
+    if (window.confirm('저장 하시겠습니까?')) {
+      saveRequest({
+        data: fieldValues,
+      }).then((response) => {
+        const savedPost = response.data;
+        if (handleDidSave) handleDidSave(savedPost);
+      });
+    }
   };
 
   return (
