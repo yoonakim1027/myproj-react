@@ -2,8 +2,9 @@ import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useApiAxios } from 'api/base';
 import LoadingIndicator from 'components/LoadingIndicator';
-
 import Button from 'components/Button';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function PostDetail({ postId }) {
   const navigate = useNavigate();
@@ -21,11 +22,20 @@ function PostDetail({ postId }) {
       { manual: true },
     );
 
-  const handleDelete = () => {
-    if (window.confirm('정말로 지우시겠습니까?')) {
-      // REST API 에서는 DELETE 요청에 대한 응답이 없습니다.
+  const handleDelete = (e) => {
+    e.preventDefault();
+    if (window.confirm('정말 삭제하시겠습니까?')) {
       deletePost().then(() => {
         navigate('/blog/');
+        toast.info('🦄 삭제 완료입니다 !', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
     }
   };
@@ -64,15 +74,18 @@ function PostDetail({ postId }) {
             목록으로
           </Link>
         </Button>
+
         <Button>
           <Link to={`/blog/${postId}/edit/`} className="hover:text-white-400">
             수정하기
           </Link>
         </Button>
 
-        <Button disabled={deleteLoading} onClick={handleDelete} type="pink">
-          삭제하기
-        </Button>
+        <div>
+          <Button disabled={deleteLoading} onClick={handleDelete} type="pink">
+            삭제하기
+          </Button>
+        </div>
       </div>
     </div>
   );
