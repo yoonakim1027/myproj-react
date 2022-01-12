@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useApiAxios } from 'api/base';
 import LoadingIndicator from 'components/LoadingIndicator';
+import Button from 'components/Button';
 
 function ArticleDetail({ articleId }) {
   const [{ data: article, loading, error }, refetch] = useApiAxios(
@@ -55,19 +56,25 @@ function ArticleDetail({ articleId }) {
       )}
       <hr className="my-3" />
       <div className="flex gap-4 mt-3 mb-10">
-        <Link to="/news/" className="hover:text-red-400">
-          목록으로
-        </Link>
-        <Link to={`/news/${articleId}/edit/`} className="hover:text-red-400">
-          수정하기
-        </Link>
-        <button
+        <Button>
+          <Link to="/news/" className="hover:text-red-400">
+            목록으로
+          </Link>
+        </Button>
+        <Button type="pink">
+          <Link to={`/news/${articleId}/edit/`} className="hover:text-red-400">
+            수정하기
+          </Link>
+        </Button>
+
+        <Button
+          type="purple"
           disabled={deleteLoading}
           onClick={handleDelete}
           className="hover:text-red-400"
         >
           삭제하기
-        </button>
+        </Button>
       </div>
     </div>
   );

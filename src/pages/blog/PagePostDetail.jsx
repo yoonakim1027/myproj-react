@@ -2,6 +2,7 @@ import DebugStates from 'components/DebugStates';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { axiosInstance } from 'api/base';
+import Button from 'components/Button';
 
 function PagePostDetail() {
   const [loading, setLoading] = useState(false);
@@ -56,12 +57,9 @@ function PagePostDetail() {
       <hr />
       <br></br>
 
-      <button
-        onClick={() => navigate(`/blog/`)}
-        className="shadow bg-blue-400 hover:bg-blue-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-      >
+      <Button onClick={() => navigate(`/blog/`)} type="primary">
         뒤로가기
-      </button>
+      </Button>
       <DebugStates loading={loading} error={error} postList={viewPost} />
     </div>
   );

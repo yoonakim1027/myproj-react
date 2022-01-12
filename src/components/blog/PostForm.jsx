@@ -2,6 +2,8 @@
 // handleFieldChange : 각 필드 값이 변화 시에 호출
 // handleSubmit : 인자없는 함수. submit 시에 호출.
 
+import Button from 'components/Button';
+
 function PostForm({
   errorMessages,
   fieldValues,
@@ -56,14 +58,14 @@ function PostForm({
       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0"></div>
 
       <div className="text-center">
-        <button
-          className=" shadow bg-pink-300 hover:bg-pink-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-5 md:mb-0 rounded cursor-pointer"
+        <Button
+          type="success"
           onClick={() => handleClickedSubmitButton()}
           disabled={loading}
         >
           {loading && '로딩 아이콘'}
           저장하기
-        </button>
+        </Button>
         <br></br>
       </div>
     </div>

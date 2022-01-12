@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { axiosInstance } from 'api/base';
 import Clock from 'pages/examples/Clock';
+import Button from 'components/Button';
 // import PostForm from 'components/blog/PostForm';
 // import PagePostDetail from './PagePostDetail';
 // import PostDetail from 'components/blog/PostDetail';
@@ -84,20 +85,14 @@ function PagePostList() {
         <br></br>
         <div className="text-center">
           {!viewForm && (
-            <button
-              onClick={() => navigate('/blog/new/')}
-              className="shadow bg-purple-400 hover:bg-purple-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-            >
+            <Button onClick={() => navigate('/blog/new/')} type="purple">
               새 포스팅
-            </button>
+            </Button>
           )}
 
-          <button
-            onClick={() => refetch()}
-            className="shadow bg-blue-400 hover:bg-blue-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-          >
+          <Button onClick={() => refetch()} type="green">
             새로고침
-          </button>
+          </Button>
         </div>
 
         <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -115,7 +110,6 @@ function PagePostList() {
         <hr />
         <br></br>
         <DebugStates loading={loading} error={error} postList={postList} />
-        
       </div>
     </>
   );
