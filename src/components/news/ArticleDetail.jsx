@@ -1,13 +1,13 @@
 // 속성값을 인자로 받는다
+import { useApiAxios } from 'api/base';
 
-import useAxios from 'axios-hooks';
 import { Link } from 'react-router-dom';
 
 // 받은 id에 해당하는 컨텐츠를 보여줌
 function ArticleDetail({ articleId }) {
   // 내가 원하는 값만 조회하기 위해 {} 사용
-  const [{ data: article, loading, error }] = useAxios(
-    `http://localhost:8000/news/api/articles/${articleId}/`,
+  const [{ data: article, loading, error }] = useApiAxios(
+    `/news/api/articles/${articleId}/`,
   );
   //data는 너무 평범하니까 ? 이름을 바꿈
   return (

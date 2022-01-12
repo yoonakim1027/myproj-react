@@ -11,7 +11,7 @@ function PageNewsIndex() {
       <h2>뉴스 대문 페이지</h2>
       <ArticleList />
 
-      <Button onClick={() => navigate('/news/edit')}>새 포스팅 쓰기</Button>
+      <Button onClick={() => navigate('/news/new/')}>새 포스팅 쓰기</Button>
       <h2>뉴스 추천</h2>
       <h2>광고</h2>
     </div>

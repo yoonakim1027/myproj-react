@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 function TopNav() {
   return (
     <div className="my-3">
-      <Clock />
       <ul className="flex border-b">
         <li className="-mb-px mr-1 cursor-pointer hover:bg-red-300 bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold">
           <MyLink to="/blog/">블로그</MyLink>
