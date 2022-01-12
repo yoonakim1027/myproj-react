@@ -1,33 +1,74 @@
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useApiAxios } from 'api/base';
+import LoadingIndicator from 'components/LoadingIndicator';
 
-function PostDetail({ post, handleEdit, handleDelete }) {
-  const { title } = post;
-  const { id: postId } = post;
+import Button from 'components/Button';
+
+function PostDetail({ postId }) {
   const navigate = useNavigate();
+
+  const [{ data: post, loading, error }, refetch] = useApiAxios(
+    `/blog/api/posts/${postId}/`,
+  );
+
+  const [{ loading: deleteLoading, error: deleteError }, deletePost] =
+    useApiAxios(
+      {
+        url: `/blog/api/posts/${postId}/`,
+        method: 'DELETE',
+      },
+      { manual: true },
+    );
+
+  const handleDelete = () => {
+    if (window.confirm('정말로 지우시겠습니까?')) {
+      // REST API 에서는 DELETE 요청에 대한 응답이 없습니다.
+      deletePost().then(() => {
+        navigate('/blog/');
+      });
+    }
+  };
+
+  useEffect(() => {
+    refetch();
+  }, []);
+
   return (
     <div className="bg-white shadow-md rounded border border-gray-400 my-1 p-1">
-      <div>
-        <span
-          onClick={() => handleEdit()}
-          className="hover:text-blue-400 cursor-pointer mr-1"
-        >
-          수정
-        </span>
-        <span
-          onClick={() => handleDelete()}
-          className="hover:text-red-400 cursor-pointer mr-1"
-        >
-          삭제
-        </span>
+      {loading && <LoadingIndicator />}
+      {deleteLoading && <LoadingIndicator>삭제 중... </LoadingIndicator>}
+      {error &&
+        `로딩 중 에러가 발생했습니다. (${error.response.status} ${error.response.sttusText})`}
+      {deleteError &&
+        `삭제 요청 중 에러가 발생했습니다. (${deleteError.response.status} ${deleteError.response.statusText})`}
+      {post && (
+        <>
+          <h3 className="bg-white shadow-md rounded border border-gray-400 my-1 p-1">
+            {post.title}
+          </h3>
+          <div>
+            {post.content.split(/[\r\n]+/).map((line, index) => (
+              <p className="my-3" key={index}>
+                {line}
+              </p>
+            ))}
+          </div>
+        </>
+      )}
+
+      <hr className="my-3" />
+      <div className="flex gap-4 mt-3 mb-10">
+        <Link to="/blog/" className="hover:text-red-300">
+          목록으로
+        </Link>
+        <Link to={`/blog/${postId}/edit/`} className="hover:text-red-400">
+          수정하기
+        </Link>
+        <Button disabled={deleteLoading} onClick={handleDelete} type="pink">
+          삭제하기
+        </Button>
       </div>
-      <span
-        onClick={() => {
-          navigate(`/blog/${postId}/`);
-        }}
-        className="px-2 py-1 rounded hover:bg-blue-200 cursor-pointer"
-      >
-        {title}
-      </span>
     </div>
   );
 }
