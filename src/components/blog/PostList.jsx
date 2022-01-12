@@ -22,15 +22,15 @@ function PostList() {
 
   return (
     <div>
-      <div className="bg-white shadow-md rounded border border-gray-400 my-3 p-1">
+      <div className="bg-white rounded border border-gray-400 my-3 p-2 ">
         {loading && '로딩 중 ...'}
         {error && '로딩 중 에러가 발생했습니다.'}
         {postList && postList.map((post) => <PostSummary post={post} />)}
       </div>
 
       <ToastContainer />
-
-      <div className="my-3">
+      <hr />
+      <div className="my-3 text-center">
         <Button type="pink" onClick={handleDebugClick}>
           Debug 상태 보기
         </Button>

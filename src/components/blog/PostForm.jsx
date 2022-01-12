@@ -57,7 +57,7 @@ function PostForm({ postId, handleDidSave }) {
             `저장 중 에러가 발생했습니다. (${saveError.response.status} ${saveError.response.statusText})`}
 
           <form onSubmit={handleSubmit}>
-            <div className="block uppercase tracking-wide text-gray-700 text-lg font-bold mb-2">
+            <div className="my-3 block uppercase tracking-wide text-gray-700 text-lg font-bold mb-2">
               <input
                 name="title"
                 value={fieldValues.title}
@@ -84,7 +84,7 @@ function PostForm({ postId, handleDidSave }) {
               />
             </div>
 
-            <div className="text-center">
+            <div className="text-center my-3">
               <Button type="success">저장하기</Button>
               <br></br>
             </div>

@@ -27,7 +27,7 @@ function PostDetail({ postId }) {
     if (window.confirm('정말 삭제하시겠습니까?')) {
       deletePost().then(() => {
         navigate('/blog/');
-        toast.info('🦄 삭제 완료입니다 !', {
+        toast.info('🐻🐼 삭제 완료입니다 ! 🐶❤️', {
           position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
@@ -81,11 +81,9 @@ function PostDetail({ postId }) {
           </Link>
         </Button>
 
-        <div>
-          <Button disabled={deleteLoading} onClick={handleDelete} type="pink">
-            삭제하기
-          </Button>
-        </div>
+        <Button disabled={deleteLoading} onClick={handleDelete} type="pink">
+          삭제하기
+        </Button>
       </div>
     </div>
   );
