@@ -1,6 +1,3 @@
-import PostDetail from 'components/blog/PostDetail';
-import PostForm from 'components/blog/PostForm';
-import PostList from 'components/blog/PostList';
 import TopNav from 'components/TopNav';
 import Login from 'pages/accounts/Login';
 import Profile from 'pages/accounts/Profile';
@@ -19,6 +16,8 @@ import CssModule from 'pages/examples/CssModule';
 import CssInJs from 'pages/examples/CssInJs';
 import ContextAPISample from 'pages/examples/ContextAPISample';
 import ContextApiSample2 from 'pages/examples/ContextAPISample2';
+import PageNewsIndex from 'pages/news/PageNewsIndex';
+import PageNewsArticleDetail from 'pages/news/PageNewsArticleDetail';
 
 function App() {
   const windowWidth = useWindowWidth();
@@ -28,7 +27,7 @@ function App() {
       <div className="app">
         <TopNav />
         <Routes>
-          <Route path="/" element={<Navigate to="/reviews/" />} />
+          <Route path="/" element={<Navigate to="/blog/" />} />
           <Route path="/accounts/login/" element={<Login />} />
           <Route path="/accounts/profile/" element={<Profile />} />
           <Route path="/reviews/" element={<ReviewList />} />
@@ -40,7 +39,11 @@ function App() {
           <Route path="/blog/new/" element={<PagePostForm />} />
           <Route path="/examples/cssmodule/" element={<CssModule />} />
           <Route path="/examples/cssinjs/" element={<CssInJs />} />
-          <Route
+          <Route path="/news/" element={<PageNewsIndex />} />
+          <Route path="/news/:articleId" element={<PageNewsArticleDetail />} />
+          {/* :가 붙어야 주소가 매칭이된다  -> 이렇게 렌더링*/}
+
+          {/* <Route
             path="/examples/context-api-sample2/"
             element={<ContextApiSample2 />}
           />
@@ -48,7 +51,7 @@ function App() {
           <Route
             path="/examples/context-api-sample/"
             element={<ContextAPISample />}
-          />
+          /> */}
         </Routes>
         <hr />
         윈도우 가로크기 : {windowWidth}px
