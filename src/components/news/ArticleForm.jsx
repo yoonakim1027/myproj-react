@@ -16,13 +16,21 @@ const INIT__FIELD_VALUES = { title: '', content: '' }; // 초깃값 : 이 값은
 
 // 속성값(articleId, handleDidSave)
 function ArticleForm({ articleId, handleDidSave }) {
-  const [{ loading: saveLoading, error: saveError }, saveRequest] = useApiAxios(
+  const [
+    {
+      loading: saveLoading,
+      error: saveError,
+      errorMessages: saveErrorMessages,
+    },
+    saveRequest,
+  ] = useApiAxios(
     {
       url: '/news/api/articles/',
       method: 'POST',
     },
     { manual: true },
   );
+
   // 첫번째 인자가 오브젝트
   // 두번째 인자가
 
@@ -67,6 +75,11 @@ function ArticleForm({ articleId, handleDidSave }) {
             type="text"
             className="p-1 bg-gray-100 w-full outline-none focus:border focus:border-gray-400 focus:border-dashed"
           />
+          {saveErrorMessages.title?.map((message, index) => (
+            <p key={index} className="text-xs text-red-400">
+              {message}
+            </p>
+          ))}
         </div>
 
         <div className="my-3">
@@ -76,12 +89,20 @@ function ArticleForm({ articleId, handleDidSave }) {
             onChange={handleFieldChange}
             className="p-1 bg-gray-100 w-full h-80 outline-none focus:border focus:border-gray-400 focus:border-dashed"
           />
+          {saveErrorMessages.content?.map((message, index) => (
+            <p key={index} className="text-xs text-red-400">
+              {message}
+            </p>
+          ))}
         </div>
         <div className="my-3">
           <Button>저장하기</Button>
         </div>
       </form>
-      <DebugStates fieldValues={fieldValues} />
+      <DebugStates
+        saveErrorMessages={saveErrorMessages}
+        fieldValues={fieldValues}
+      />
     </div>
   );
 }
