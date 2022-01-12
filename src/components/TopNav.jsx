@@ -5,10 +5,10 @@ function TopNav() {
   return (
     <div className="my-3">
       <ul className="flex border-b">
-        <li className="-mb-px mr-1 cursor-pointer hover:bg-red-300 bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold">
+        <li className="-mb-px mr-1 cursor-pointer hover:bg-red-300  bg-white inline-block border-l border-t border-r rounded-t py-2 px-4  font-semibold">
           <MyLink to="/blog/">블로그</MyLink>
         </li>
-        <li className="-mb-px mr-1 cursor-pointer hover:bg-blue-300 bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold">
+        <li className="-mb-px mr-1 cursor-pointer hover:bg-blue-300 bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 font-semibold">
           <MyLink to="/news/">뉴스룸</MyLink>
         </li>
 
@@ -49,10 +49,7 @@ function TopNav() {
 
 function MyLink({ to, children }) {
   return (
-    <Link
-      to={to}
-      className="pb-1 text-gray-500 hover:text-red-500 hover:border-red-500 hover:border-b-4"
-    >
+    <Link to={to} className="pb-1 text-gray-400  hover:border-b-4">
       {children}
     </Link>
   );

@@ -11,7 +11,7 @@ function PageNewsArticleDetail() {
     <div>
       <h2> 뉴스기사 #{articleId} 보여주기</h2>
       <ArticleDetail articleId={articleId} />
-
+      <hr />
       <h3>비슷한 기사 목록</h3>
       <h3>관심있는 기사목록</h3>
     </div>

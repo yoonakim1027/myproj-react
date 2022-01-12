@@ -11,7 +11,7 @@ p {
   top: 5%;
   transform: translate(-50%, -50%);
   color: #080b0c;
-  width: 400px;
+  width: 100px;
   text-shadow: 0 0 20px rgb(171, 190, 250), 0 0 20px rgba(10, 175, 230, 0);
 }
 .clock .time {

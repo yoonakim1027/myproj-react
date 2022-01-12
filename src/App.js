@@ -36,7 +36,7 @@ function App() {
   return (
     <>
       <div className="app">
-        {/* <Clock /> */}
+        <Clock />
         <TopNav />
         <Routes>
           <Route path="/" element={<Navigate to="/blog/" />} />
