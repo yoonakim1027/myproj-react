@@ -3,10 +3,10 @@
 // simple, fill, outline, bordered, disabled, 3d, elevated, icons
 
 const COLORS = {
-  primary: 'bg-blue-500 hover:bg-blue-700 text-white ',
-  success: 'bg-green-500 hover:bg-green-700 text-white ',
+  primary: 'bg-blue-500 hover:bg-blue-300 text-white ',
+  success: 'bg-green-500 hover:bg-green-300 text-white ',
   green: 'bg-green-500 text-white hover:bg-green-300 ',
-  pink: 'bg-pink-500 text-white hover:bg-pink-300 ',
+  pink: 'bg-pink-400 text-white hover:bg-pink-300 ',
   purple: 'bg-purple-500 text-white hover:bg-purple-300 ',
   // TODO: 다양한 스타일 추가
 };
