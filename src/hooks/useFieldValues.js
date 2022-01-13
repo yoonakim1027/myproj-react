@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 function useFieldValues(initialValues) {
   const [fieldValues, setFieldValues] = useState(initialValues);
+  const [formData, setFormData] = useState(new FormData());
 
   // 함수 객체를 생성할 때, 의존성이 걸린 값이 변경시에만 함수를 재생성
   const handleFieldChange = useCallback((e) => {
@@ -9,14 +10,29 @@ function useFieldValues(initialValues) {
     setFieldValues((prevFieldValues) => {
       return {
         ...prevFieldValues,
-        [name]: (files && Array.from(files)) || value, // files가 있으면 files를 쓰고, 없으면 value를 쓰겠다
-      }; // files가 있으면 배열로 변환해서 저장
+        [name]: (files && Array.from(files)) || value,
+      };
     });
   }, []);
 
   const clearFieldValues = useCallback(() => {
     setFieldValues(initialValues);
   }, [initialValues]);
+
+  // fieldValues 변경 시마다 formData를 갱신합니다.
+  useEffect(() => {
+    setFormData(
+      Object.entries(fieldValues).reduce((_formData, [name, value]) => {
+        if (Array.isArray(value)) {
+          const fileList = value;
+          fileList.forEach((file) => _formData.append(name, file));
+        } else {
+          _formData.append(name, value);
+        }
+        return _formData;
+      }, new FormData()),
+    );
+  }, [fieldValues]);
 
   // initialValues 속성값이 변경되면 fieldValues를 초기화합니다.
   useEffect(() => {
@@ -28,6 +44,7 @@ function useFieldValues(initialValues) {
     handleFieldChange,
     clearFieldValues,
     setFieldValues,
+    formData,
   };
 }
 
