@@ -25,6 +25,10 @@ function ArticleForm({ articleId, handleDidSave }) {
       error: saveError,
       errorMessages: saveErrorMessages,
     },
+
+    // fieldValues : 객체 (파일을 제외하고 전달 가능)
+    // 파일을 업로드 하기 위해서는 ? FormData라는 클래스 인스턴스를 써야한다
+    // 파일을 업로드 안할때에도 FormData를 쓸 수는 있음
     saveRequest,
   ] = useApiAxios(
     {
@@ -43,8 +47,25 @@ function ArticleForm({ articleId, handleDidSave }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // map : 리턴값으로 새로운 배열을 만들어 주는 것 -> 불필요하게 배열을 만들수도 있음
+    // forEach : 단순히 순회만
+    // 배열로 키 : 밸류가 동시에 넘어옴
+    const formData = new FormData();
+    // [name, value ] -> field의 name과 value임
+    Object.entries(fieldValues).forEach(([name, value]) => {
+      // 순회돌면서 formData에 append만 해주면 됨
+      // 배열인지 아닌지 구분 isArray
+      if (Array.isArray(value)) {
+        const fileList = value;
+        // fileList도 단순히 순회만 돌면서 append
+        fileList.forEach((file) => formData.append(name, file));
+      } else {
+        formData.append(name, value);
+      }
+    });
+
     saveRequest({
-      data: fieldValues,
+      data: formData,
     }).then((response) => {
       const savedPost = response.data;
       if (handleDidSave) handleDidSave(savedPost);
@@ -81,11 +102,13 @@ function ArticleForm({ articleId, handleDidSave }) {
             accept=".png, .jpg, .jpeg"
             name="photo"
             onChange={handleFieldChange}
-            //파일의 경우에는 데이터를 가지고 있는게 아니라, 데이터의 주소를 가지게 됨.
-            // 파일의 경우에는 데이터를 못 싣는다 그래서 value를 지정 X 대신 onChange
+            // 파일의 항목에서 배열을 만들 수 있음
           />
-          {/* 확장자가 얘네들이 아니면 비활성화 버튼이 뜬다 */}
-          {/* multiple = {true} -> true 생략하고 multiple만 쓰면 그냥 참인 상태로 생략!(여러 개 지정) */}
+          {saveErrorMessages.photo?.map((photo, index) => (
+            <p key={index} className="text-xs text-red-400">
+              {photo}
+            </p>
+          ))}
         </div>
 
         <div className="my-3">
