@@ -7,6 +7,7 @@ import DebugStates from 'components/DebugStates';
 import LoadingIndicator from 'components/LoadingIndicator';
 import useFieldValues from 'hooks/useFieldValues';
 import { useApiAxios } from 'api/base';
+import { useEffect } from 'react/cjs/react.development';
 
 const INIT_FIELD_VALUES = { title: '', content: '' };
 
@@ -33,15 +34,33 @@ function PostForm({ postId, handleDidSave }) {
     { manual: true },
   );
 
-  const { fieldValues, handleFieldChange } = useFieldValues(
+  const { setFieldValues, fieldValues, handleFieldChange } = useFieldValues(
     post || INIT_FIELD_VALUES,
   );
 
+  // useEffect(() => {
+  //   setFieldValues((prevFieldValues) => ({
+  //     ...prevFieldValues,
+  //     photo: '', // 그냥 photo를 빈 문자열로!
+  //   }));
+  // }, [post]); // []는 의존성! -> []안에 있는 것이 바뀌었을때? (Form이 처음뜰때)
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    Object.entries(fieldValues).forEach(([name, value]) => {
+      if (Array.isArray(value)) {
+        const fileList = value;
+
+        fileList.forEach((file) => formData.append(name, file));
+      } else {
+        formData.append(name, value);
+      }
+    });
+
     if (window.confirm('저장 하시겠습니까?')) {
       saveRequest({
-        data: fieldValues,
+        data: formData,
       }).then((response) => {
         const savedPost = response.data;
         if (handleDidSave) handleDidSave(savedPost);
@@ -74,6 +93,19 @@ function PostForm({ postId, handleDidSave }) {
               ))}
             </div>
 
+            <div className="block uppercase tracking-wide text-gray-700 text-lg font-bold mb-2 my-3">
+              <input
+                type="file"
+                accept=".png, .jpg, .jpeg"
+                name="photo"
+                onChange={handleFieldChange}
+              />
+              {saveErrorMessages.photo?.map((photo, index) => (
+                <p key={index} className="text-xs text-red-400">
+                  {photo}
+                </p>
+              ))}
+            </div>
             <div className="block uppercase tracking-wide text-gray-700 text-lg font-bold mb-2">
               <br></br>
               <textarea
@@ -83,6 +115,11 @@ function PostForm({ postId, handleDidSave }) {
                 className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-500 rounded mb-3 leading-loose focus:outline-none focus:bg-white pb-40 pl-2"
                 placeholder="content"
               />
+              {saveErrorMessages.content?.map((message, index) => (
+                <p key={index} className="text-xs text-red-400">
+                  {message}
+                </p>
+              ))}
             </div>
 
             <div className="text-center my-3">

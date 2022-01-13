@@ -57,6 +57,7 @@ function PostDetail({ postId }) {
           <h3 className="bg-white shadow-md rounded border border-gray-400 my-1 p-1">
             {post.title}
           </h3>
+          {post.photo && <img src={post.photo} alt={post.title} />}
           <div>
             {post.content.split(/[\r\n]+/).map((line, index) => (
               <p className="my-3" key={index}>
