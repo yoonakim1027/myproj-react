@@ -21,11 +21,19 @@ function PostList() {
   };
 
   return (
-    <div>
-      <div className="bg-gray-100 rounded border border-gray-400 my-3 p-2 ">
+    <>
+      <div className="my-5">
         {loading && '로딩 중 ...'}
         {error && '로딩 중 에러가 발생했습니다.'}
-        {postList && postList.map((post) => <PostSummary post={post} />)}
+        {postList && (
+          <div className="flex flex-wrap">
+            {postList.map((post) => (
+              <div key={post.id} className="w-full md:w-1/2 xl:w-1/3 px-4">
+                <PostSummary post={post} />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       <ToastContainer />
@@ -42,7 +50,7 @@ function PostList() {
         )}
         {console.log(debug)}
       </div>
-    </div>
+    </>
   );
 }
 
