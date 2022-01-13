@@ -44,15 +44,12 @@ function ArticleForm({ articleId, handleDidSave }) {
   );
 
   useEffect(() => {
-    // 서버로 photo=null이 전달이 되면? 아래 오류가 발생
-    // form이 바뀌었을때 -> fieldValues에서 (1) photo만 제거해주면 된다
-    // (2) photo= null이라면? "" (빈 문자열)로 변경
-
-    // 이를 대응하는 방법은?
-    setFieldValues((prevFieldValues) => ({
-      ...prevFieldValues,
-      photo: '', // 그냥 photo를 빈 문자열로!
-    }));
+    setFieldValues((prevFieldValues) => {
+      const newFieldValues = produce(prevFieldValues, (draft) => {
+        draft.photo = '';
+      });
+      return newFieldValues;
+    });
   }, [article]); // []는 의존성! -> []안에 있는 것이 바뀌었을때? (Form이 처음뜰때)
 
   const handleSubmit = (e) => {
