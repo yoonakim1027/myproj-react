@@ -76,6 +76,19 @@ function ArticleForm({ articleId, handleDidSave }) {
         </div>
 
         <div className="my-3">
+          <input
+            type="file"
+            accept=".png, .jpg, .jpeg"
+            name="photo"
+            onChange={handleFieldChange}
+            //파일의 경우에는 데이터를 가지고 있는게 아니라, 데이터의 주소를 가지게 됨.
+            // 파일의 경우에는 데이터를 못 싣는다 그래서 value를 지정 X 대신 onChange
+          />
+          {/* 확장자가 얘네들이 아니면 비활성화 버튼이 뜬다 */}
+          {/* multiple = {true} -> true 생략하고 multiple만 쓰면 그냥 참인 상태로 생략!(여러 개 지정) */}
+        </div>
+
+        <div className="my-3">
           <textarea
             name="content"
             value={fieldValues.content}
