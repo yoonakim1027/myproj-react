@@ -1,11 +1,11 @@
+import { useEffect } from 'react';
+import produce from 'immer';
 import Button from 'components/Button';
 import DebugStates from 'components/DebugStates';
 import H2 from 'components/H2';
 import LoadingIndicator from 'components/LoadingIndicator';
 import useFieldValues from 'hooks/useFieldValues';
 import { useApiAxios } from 'api/base';
-import { useEffect } from 'react';
-import produce from 'immer';
 
 const INIT_FIELD_VALUES = { title: '', content: '' };
 
@@ -27,7 +27,6 @@ function ArticleForm({ articleId, handleDidSave }) {
       error: saveError,
       errorMessages: saveErrorMessages,
     },
-
     saveRequest,
   ] = useApiAxios(
     {
@@ -39,32 +38,20 @@ function ArticleForm({ articleId, handleDidSave }) {
     { manual: true },
   );
 
-  const { setFieldValues, fieldValues, handleFieldChange } = useFieldValues(
-    article || INIT_FIELD_VALUES,
-  );
+  const { fieldValues, handleFieldChange, setFieldValues, formData } =
+    useFieldValues(article || INIT_FIELD_VALUES);
 
+  // article 조회 시에 photo 속성을 빈 문자열로 변경
   useEffect(() => {
-    setFieldValues((prevFieldValues) => {
-      const newFieldValues = produce(prevFieldValues, (draft) => {
+    setFieldValues(
+      produce((draft) => {
         draft.photo = '';
-      });
-      return newFieldValues;
-    });
-  }, [article]); // []는 의존성! -> []안에 있는 것이 바뀌었을때? (Form이 처음뜰때)
+      }),
+    );
+  }, [article]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const formData = new FormData();
-    Object.entries(fieldValues).forEach(([name, value]) => {
-      if (Array.isArray(value)) {
-        const fileList = value;
-
-        fileList.forEach((file) => formData.append(name, file));
-      } else {
-        formData.append(name, value);
-      }
-    });
 
     saveRequest({
       data: formData,
@@ -99,20 +86,6 @@ function ArticleForm({ articleId, handleDidSave }) {
         </div>
 
         <div className="my-3">
-          <input
-            type="file"
-            accept=".png, .jpg, .jpeg"
-            name="photo"
-            onChange={handleFieldChange}
-          />
-          {saveErrorMessages.photo?.map((photo, index) => (
-            <p key={index} className="text-xs text-red-400">
-              {photo}
-            </p>
-          ))}
-        </div>
-
-        <div className="my-3">
           <textarea
             name="content"
             value={fieldValues.content}
@@ -120,6 +93,21 @@ function ArticleForm({ articleId, handleDidSave }) {
             className="p-1 bg-gray-100 w-full h-80 outline-none focus:border focus:border-gray-400 focus:border-dashed"
           />
           {saveErrorMessages.content?.map((message, index) => (
+            <p key={index} className="text-xs text-red-400">
+              {message}
+            </p>
+          ))}
+        </div>
+
+        <div className="my-3">
+          <input
+            type="file"
+            accept=".png, .jpg, .jpeg"
+            name="photo"
+            // value=""
+            onChange={handleFieldChange}
+          />
+          {saveErrorMessages.photo?.map((message, index) => (
             <p key={index} className="text-xs text-red-400">
               {message}
             </p>
