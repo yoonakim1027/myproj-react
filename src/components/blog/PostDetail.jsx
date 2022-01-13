@@ -70,9 +70,9 @@ function PostDetail({ postId }) {
       )}
 
       <hr className="my-3" />
-      <div className="gap-5 mt-3 mb-10">
+      <div className="text-center gap-5 mt-4 mb-10 ">
         <Button type="purple">
-          <Link to="/blog/" className="hover:text-white-300">
+          <Link to="/blog/" className="hover:text-white-300 ">
             목록으로
           </Link>
         </Button>

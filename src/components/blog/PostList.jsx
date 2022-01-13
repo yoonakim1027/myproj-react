@@ -24,13 +24,16 @@ function PostList() {
 
   return (
     <>
-      <div className="my-5">
+      <div className="w-full my-5">
         {loading && '로딩 중 ...'}
         {error && '로딩 중 에러가 발생했습니다.'}
         {postList && (
           <div className="flex flex-wrap">
             {postList.map((post) => (
-              <div key={post.id} className="w-full md:w-1/2 xl:w-1/3 px-4">
+              <div
+                key={post.id}
+                className="transition-transform hover:-translate-y-5 duration-300 w-full px-4"
+              >
                 <PostSummary post={post} />
               </div>
             ))}
