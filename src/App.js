@@ -24,6 +24,8 @@ import PageNewsArticleForm from 'pages/news/PageNewsArticleForm';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import './App.css';
+import PageMusicList from 'pages/music/PageMusicList';
+
 // import Components from 'pages/examples/Components';
 // import CssModule from 'pages/examples/CssModule';
 // import CssInJs from 'pages/examples/CssInJs';
@@ -56,6 +58,8 @@ function App() {
             path="/news/:articleId/edit/"
             element={<PageNewsArticleForm />}
           />
+
+          <Route path="/music/" element={<PageMusicList />} />
 
           {/* :가 붙어야 주소가 매칭이된다  -> 이렇게 렌더링*/}
 

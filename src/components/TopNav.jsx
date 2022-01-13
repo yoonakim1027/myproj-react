@@ -1,4 +1,3 @@
-import Clock from 'pages/examples/Clock';
 import { Link, NavLink } from 'react-router-dom';
 
 function TopNav() {
@@ -8,8 +7,11 @@ function TopNav() {
         <li className="-mb-px mr-1 cursor-pointer   bg-white inline-block border-l border-t border-r rounded-t py-2 px-4  font-semibold">
           <MyLink to="/blog/">블로그</MyLink>
         </li>
-        <li className="-mb-px mr-1 cursor-pointer  bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 font-semibold">
+        {/* <li className="-mb-px mr-1 cursor-pointer  bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 font-semibold">
           <MyLink to="/news/">뉴스룸</MyLink>
+        </li> */}
+        <li className="-mb-px mr-1 cursor-pointer  bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 font-semibold">
+          <MyLink to="/music/">융's Music</MyLink>
         </li>
 
         {/* <li className="-mb-px mr-1 bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold">
