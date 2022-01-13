@@ -6,7 +6,9 @@ import Button from 'components/Button';
 
 function ArticleDetail({ articleId }) {
   const [{ data: article, loading, error }, refetch] = useApiAxios(
-    `/news/api/articles/${articleId}/`,
+    //자동으로 읽어옴
+    `/news/api/articles/${articleId}/`, // 첫번째 인자로 주소
+    { manual: true }, // 두번째 인자로 옵션을 지정
   );
   const navigate = useNavigate();
 
@@ -31,7 +33,7 @@ function ArticleDetail({ articleId }) {
   };
 
   useEffect(() => {
-    refetch();
+    refetch(); // 자동으로 한번 들어가고, refetch가 또 들어가서 두번 요청되는 것
   }, []);
 
   return (

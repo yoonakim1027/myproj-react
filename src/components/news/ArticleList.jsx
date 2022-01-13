@@ -6,6 +6,7 @@ import ArticleSummary from './ArticleSummary';
 function ArticleList() {
   const [{ data: articleList, loading, error }, refetch] = useApiAxios(
     '/news/api/articles/',
+    { manual: true },
   );
 
   useEffect(() => {
@@ -13,7 +14,7 @@ function ArticleList() {
   }, []);
 
   return (
-    <div className="my-5">
+    <div className="my-5 ">
       {loading && '로딩 중 ...'}
       {error && '로딩 중 에러가 발생했습니다.'}
       {articleList && (
