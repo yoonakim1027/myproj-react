@@ -19,6 +19,8 @@ function useApiAxios(config, options) {
 
   const [errorMessages, setErrorMessages] = useState({});
 
+  // error?.response? 둘 다 undefined 일 때
+  // undefined면 안뜨고, 있으면 뜨는거
   useEffect(() => {
     if (error?.response?.status === 400) {
       setErrorMessages(error.response.data);

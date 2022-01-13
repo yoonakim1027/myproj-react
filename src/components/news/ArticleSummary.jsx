@@ -10,6 +10,7 @@ function ArticleSummary({ article }) {
   return (
     <div>
       <h2>
+        {article.photo && <img src={article.photo} art={article.title} />}
         <Link to={`/news/${article.id}/`}>
           {article.id}. {article.title}
         </Link>
