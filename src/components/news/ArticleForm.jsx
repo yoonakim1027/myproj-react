@@ -4,6 +4,8 @@ import H2 from 'components/H2';
 import LoadingIndicator from 'components/LoadingIndicator';
 import useFieldValues from 'hooks/useFieldValues';
 import { useApiAxios } from 'api/base';
+import { useEffect } from 'react';
+import produce from 'immer';
 
 const INIT_FIELD_VALUES = { title: '', content: '' };
 
@@ -26,9 +28,6 @@ function ArticleForm({ articleId, handleDidSave }) {
       errorMessages: saveErrorMessages,
     },
 
-    // fieldValues : 객체 (파일을 제외하고 전달 가능)
-    // 파일을 업로드 하기 위해서는 ? FormData라는 클래스 인스턴스를 써야한다
-    // 파일을 업로드 안할때에도 FormData를 쓸 수는 있음
     saveRequest,
   ] = useApiAxios(
     {
@@ -40,24 +39,30 @@ function ArticleForm({ articleId, handleDidSave }) {
     { manual: true },
   );
 
-  const { fieldValues, handleFieldChange } = useFieldValues(
+  const { setFieldValues, fieldValues, handleFieldChange } = useFieldValues(
     article || INIT_FIELD_VALUES,
   );
+
+  useEffect(() => {
+    // 서버로 photo=null이 전달이 되면? 아래 오류가 발생
+    // form이 바뀌었을때 -> fieldValues에서 (1) photo만 제거해주면 된다
+    // (2) photo= null이라면? "" (빈 문자열)로 변경
+
+    // 이를 대응하는 방법은?
+    setFieldValues((prevFieldValues) => ({
+      ...prevFieldValues,
+      photo: '', // 그냥 photo를 빈 문자열로!
+    }));
+  }, [article]); // []는 의존성! -> []안에 있는 것이 바뀌었을때? (Form이 처음뜰때)
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // map : 리턴값으로 새로운 배열을 만들어 주는 것 -> 불필요하게 배열을 만들수도 있음
-    // forEach : 단순히 순회만
-    // 배열로 키 : 밸류가 동시에 넘어옴
     const formData = new FormData();
-    // [name, value ] -> field의 name과 value임
     Object.entries(fieldValues).forEach(([name, value]) => {
-      // 순회돌면서 formData에 append만 해주면 됨
-      // 배열인지 아닌지 구분 isArray
       if (Array.isArray(value)) {
         const fileList = value;
-        // fileList도 단순히 순회만 돌면서 append
+
         fileList.forEach((file) => formData.append(name, file));
       } else {
         formData.append(name, value);
@@ -102,7 +107,6 @@ function ArticleForm({ articleId, handleDidSave }) {
             accept=".png, .jpg, .jpeg"
             name="photo"
             onChange={handleFieldChange}
-            // 파일의 항목에서 배열을 만들 수 있음
           />
           {saveErrorMessages.photo?.map((photo, index) => (
             <p key={index} className="text-xs text-red-400">
