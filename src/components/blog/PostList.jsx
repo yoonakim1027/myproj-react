@@ -8,8 +8,10 @@ import { useEffect, useState } from 'react/cjs/react.development';
 import PostSummary from './PostSummary';
 
 function PostList() {
-  const [{ data: postList, loading, error }, refetch] =
-    useApiAxios(`/blog/api/posts/`);
+  const [{ data: postList, loading, error }, refetch] = useApiAxios(
+    `/blog/api/posts/`,
+    { manual: true },
+  );
 
   useEffect(() => {
     refetch();

@@ -11,6 +11,7 @@ function PostDetail({ postId }) {
 
   const [{ data: post, loading, error }, refetch] = useApiAxios(
     `/blog/api/posts/${postId}/`,
+    { manual: true },
   );
 
   const [{ loading: deleteLoading, error: deleteError }, deletePost] =
