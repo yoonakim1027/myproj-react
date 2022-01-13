@@ -8,6 +8,7 @@ import LoadingIndicator from 'components/LoadingIndicator';
 import useFieldValues from 'hooks/useFieldValues';
 import { useApiAxios } from 'api/base';
 import { useEffect } from 'react/cjs/react.development';
+import produce from 'immer';
 
 const INIT_FIELD_VALUES = { title: '', content: '' };
 
@@ -38,12 +39,14 @@ function PostForm({ postId, handleDidSave }) {
     post || INIT_FIELD_VALUES,
   );
 
-  // useEffect(() => {
-  //   setFieldValues((prevFieldValues) => ({
-  //     ...prevFieldValues,
-  //     photo: '', // 그냥 photo를 빈 문자열로!
-  //   }));
-  // }, [post]); // []는 의존성! -> []안에 있는 것이 바뀌었을때? (Form이 처음뜰때)
+  useEffect(() => {
+    setFieldValues((prevFieldValues) => {
+      const newFieldValues = produce(prevFieldValues, (draft) => {
+        draft.photo = '';
+      });
+      return newFieldValues;
+    });
+  }, [post]); // []는 의존성! -> []안에 있는 것이 바뀌었을때? (Form이 처음뜰때)
 
   const handleSubmit = (e) => {
     e.preventDefault();
