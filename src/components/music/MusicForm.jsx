@@ -4,11 +4,15 @@ import { useEffect } from 'react/cjs/react.development';
 import produce from 'immer';
 import LoadingIndicator from 'components/LoadingIndicator';
 import Button from 'components/Button';
+import DebugStates from 'components/DebugStates';
 // 초깃값
-const INIT_FIELD_VALUES = { title: '', singer: '', content: '' };
+const INIT_FIELD_VALUES = { title: '', singer: '', content: '', mood: '' };
 
+// 데이터를 받아오는 부분 - > 여기서 data
+// 여기 밑에부분이 데이터를 받아오는 부분임!!!@
+// useApiAxios 부분
 function MusicForm({ musicId, handleDidSave }) {
-  const [{ datat: music, loading: getLoading, error: getError }] = useApiAxios(
+  const [{ data: music, loading: getLoading, error: getError }] = useApiAxios(
     `/youtubemusic/api/music/${musicId}/`,
     { manual: !musicId },
   );
@@ -33,6 +37,7 @@ function MusicForm({ musicId, handleDidSave }) {
   const { setFieldValues, fieldValues, handleFieldChange, formData } =
     useFieldValues(music || INIT_FIELD_VALUES);
 
+  // music 조회 시에 photo 속성을 빈 문자열로 변경
   useEffect(() => {
     setFieldValues(
       produce((draft) => {
@@ -43,14 +48,13 @@ function MusicForm({ musicId, handleDidSave }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (window.confirm('저장 하시겠습니까?')) {
-      saveRequest({
-        data: formData,
-      }).then((response) => {
-        const savedPost = response.data;
-        if (handleDidSave) handleDidSave(savedPost);
-      });
-    }
+
+    saveRequest({
+      data: formData,
+    }).then((response) => {
+      const savedPost = response.data;
+      if (handleDidSave) handleDidSave(savedPost);
+    });
   };
 
   return (
@@ -62,6 +66,7 @@ function MusicForm({ musicId, handleDidSave }) {
         {saveLoading && <LoadingIndicator>저장 중...</LoadingIndicator>}
         {saveError &&
           `저장 중 에러가 발생했습니다. (${saveError.response.status} ${saveError.response.statusText})`}
+
         <form onSubmit={handleSubmit}>
           <div className="my-3 block uppercase tracking-wide text-gray-700 text-lg font-bold mb-2">
             <input
@@ -80,15 +85,29 @@ function MusicForm({ musicId, handleDidSave }) {
           </div>
 
           <div className="my-3">
-            <input
+            <textarea
               name="singer"
               value={fieldValues.singer}
               onChange={handleFieldChange}
-              type="text"
               placeholder="singer"
               className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white "
             />
             {saveErrorMessages.title?.map((message, index) => (
+              <p key={index} className="text-m text-red-400">
+                {message}
+              </p>
+            ))}
+          </div>
+
+          <div>
+            <textarea
+              name="content"
+              value={fieldValues.content}
+              onChange={handleFieldChange}
+              className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-500 rounded mb-3 leading-loose focus:outline-none focus:bg-white pb-40 pl-2"
+              placeholder="content"
+            />
+            {saveErrorMessages.content?.map((message, index) => (
               <p key={index} className="text-m text-red-400">
                 {message}
               </p>
@@ -110,20 +129,6 @@ function MusicForm({ musicId, handleDidSave }) {
             ))}
           </div>
 
-          <div>
-            <textarea
-              name="content"
-              value={fieldValues.content}
-              onChange={handleFieldChange}
-              className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-500 rounded mb-3 leading-loose focus:outline-none focus:bg-white pb-40 pl-2"
-              placeholder="content"
-            />
-            {saveErrorMessages.content?.map((message, index) => (
-              <p key={index} className="text-m text-red-400">
-                {message}
-              </p>
-            ))}
-          </div>
           <div className="my-3 appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white ">
             <select
               name="mood"
@@ -132,12 +137,12 @@ function MusicForm({ musicId, handleDidSave }) {
               disabled={getLoading}
               className="overflow-scroll flex "
             >
-              <option>힙할 때</option>
-              <option>우울할 때</option>
-              <option>신났을 때</option>
-              <option>운동할 때</option>
-              <option>분위기 좋은 와인바에서</option>
-              <option>집중할 때</option>
+              <option>hiphop</option>
+              <option>sad</option>
+              <option>fun</option>
+              <option>run</option>
+              <option>groove</option>
+              <option>study</option>
             </select>
             {saveErrorMessages.mood?.map((message, index) => (
               <p key={index} className="text-m text-red-400">
@@ -150,6 +155,14 @@ function MusicForm({ musicId, handleDidSave }) {
             <Button type="success">저장하기</Button>
           </div>
         </form>
+
+        <DebugStates
+          music={music}
+          getLoading={getLoading}
+          getError={getError}
+          saveErrorMessages={saveErrorMessages}
+          fieldValues={fieldValues}
+        />
       </div>
     </>
   );

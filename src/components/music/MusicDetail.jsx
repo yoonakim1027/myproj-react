@@ -1,6 +1,7 @@
 import { useApiAxios } from 'api/base';
+import Button from 'components/Button';
 import LoadingIndicator from 'components/LoadingIndicator';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react/cjs/react.development';
 
 function MusicDetail({ musicId }) {
@@ -35,6 +36,20 @@ function MusicDetail({ musicId }) {
                 {line}
               </p>
             ))}
+          </div>
+
+          <div>
+            <Button type="purple" onClick={() => navigate('/music/')}>
+              목록으로
+            </Button>
+          </div>
+          <div>
+            <Button
+              type="success"
+              onClick={() => navigate(`/music/${musicId}/edit/`)}
+            >
+              수정하기
+            </Button>
           </div>
         </>
       )}
