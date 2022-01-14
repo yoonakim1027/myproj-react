@@ -2,7 +2,7 @@ import MusicList from 'components/music/MusicList';
 
 function PageMusicList() {
   return (
-    <div>
+    <div className="bg-black">
       <MusicList />
     </div>
   );
