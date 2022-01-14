@@ -49,15 +49,19 @@ function MusicDetail({ musicId }) {
 
   return (
     <>
-      <div>
+      <div className="bg-white shadow-md rounded border border-gray-400 my-1 p-1">
         {loading && <LoadingIndicator />}
         {error &&
           `로딩 중 에러가 발생했습니다. (${error.response.status} ${error.response.statusText})`}
 
         {music && (
           <>
-            <h2> {music.title}</h2>
-            <h3> {music.singer}</h3>
+            <h2 className="bg-white shadow-md rounded border border-gray-400 my-1 p-1">
+              Title : {music.title}
+            </h2>
+            <h3 className="bg-white shadow-md rounded border border-gray-400 my-1 p-1">
+              Artist : {music.singer}
+            </h3>
             <hr />
             {music.album_photo && (
               <img src={music.album_photo} alt={music.title} />
@@ -65,13 +69,13 @@ function MusicDetail({ musicId }) {
             <hr />
             <div>
               {music.content.split(/[\r\n]+/).map((line, index) => (
-                <p className="my-3" key={index}>
+                <p className="my-3 mr-3 ml-3 bg-slate-100" key={index}>
                   {line}
                 </p>
               ))}
             </div>
-
-            <div>
+            <hr className="my-3" />
+            <div className="text-center">
               <Button type="purple" onClick={() => navigate('/music/')}>
                 목록으로
               </Button>
