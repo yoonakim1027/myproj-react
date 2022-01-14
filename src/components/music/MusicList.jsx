@@ -5,7 +5,7 @@ import MusicSummary from './MusicSummary';
 
 function MusicList() {
   const [{ data: musicList, loading, error }, refetch] = useApiAxios(
-    '/youtubemusic/api/music/',
+    `/youtubemusic/api/music/`,
     { manual: true },
   );
 

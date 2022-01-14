@@ -7,7 +7,7 @@ function MusicDetail({ musicId }) {
   const navigate = useNavigate();
 
   const [{ data: music, loading, error }, refetch] = useApiAxios(
-    `/youtubemusic/api/music/${musicId}`,
+    `/youtubemusic/api/music/${musicId}/`,
     { manual: true },
   );
 
@@ -24,7 +24,8 @@ function MusicDetail({ musicId }) {
 
       {music && (
         <>
-          <h3> {music.title}</h3>
+          <h2> {music.title}</h2>
+          <h3> {music.singer}</h3>
           <hr />
           {music.photo && <img src={music.photo} alt={music.title} />}
           <hr />
