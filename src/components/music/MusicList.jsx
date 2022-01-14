@@ -1,6 +1,9 @@
 import { useApiAxios } from 'api/base';
 import Button from 'components/Button';
-import { useEffect } from 'react/cjs/react.development';
+import { ToastContainer } from 'react-toastify';
+import { useEffect, useState } from 'react/cjs/react.development';
+import MusicChoice from './MusicChoice';
+
 import MusicSummary from './MusicSummary';
 
 function MusicList() {
@@ -13,24 +16,49 @@ function MusicList() {
     refetch();
   }, []);
 
+  const [viewList, setViewList] = useState(false);
+  const handleViewClick = (e) => {
+    e.preventDefault();
+    setViewList(true);
+  };
+
   return (
     <div>
-      <h2> Music </h2>
+      <h2 className="text-center my-3 mt-3"> 🐼 Music 🐱 </h2>
 
-      <button className="w-full">힙할 때</button>
+      <div className="px-6 py-4 mr-3">
+        <Button type="purple" onClick={handleViewClick}>
+          음악 리스트 보기
+        </Button>
 
-      {musicList && (
-        <div className="flex flex-wrap">
-          {musicList.map((music) => (
-            <div
-              key={music.id}
-              className="transition-transform hover:-translate-y-5 duration-300 w-full h-full md:w-1/2 xl:w-1/2 px-4"
-            >
-              <MusicSummary music={music} />
-            </div>
-          ))}
-        </div>
-      )}
+        {viewList && (
+          <div className="overflow-hidden flex flex-wrap">
+            {musicList.map((music) => (
+              <div
+                key={music.id}
+                className="my-3 cursor-pointer font-bold text-xl  transition-transform hover:-translate-y-5 duration-300 w-full h-full"
+              >
+                <MusicSummary music={music} />
+              </div>
+            ))}
+          </div>
+        )}
+        <Button onClick={handleViewClick}>추천 리스트 보기</Button>
+        {viewList && (
+          <div className="overflow-hidden flex flex-wrap">
+            {musicList.map((music) => (
+              <div
+                key={music.id}
+                className="my-3 cursor-pointer font-bold text-xl  transition-transform hover:-translate-y-5 duration-300 w-full h-full"
+              >
+                <MusicChoice music={music} />
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <ToastContainer />
     </div>
   );
 }

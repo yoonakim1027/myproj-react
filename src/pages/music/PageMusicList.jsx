@@ -7,13 +7,14 @@ function PageMusicList() {
 
   return (
     <>
-      <div>
+      <hr />
+      <div className="my-3 text-center">
         <Button type="green" onClick={() => navigate('/music/new/')}>
           노래 등록하기
         </Button>
       </div>
 
-      <div className="bg-black">
+      <div>
         <MusicList />
       </div>
     </>

@@ -41,7 +41,7 @@ function MusicForm({ musicId, handleDidSave }) {
   useEffect(() => {
     setFieldValues(
       produce((draft) => {
-        draft.photo = '';
+        draft.album_photo = '';
       }),
     );
   }, [music]);
@@ -69,73 +69,96 @@ function MusicForm({ musicId, handleDidSave }) {
 
         <form onSubmit={handleSubmit}>
           <div className="my-3 block uppercase tracking-wide text-gray-700 text-lg font-bold mb-2">
-            <input
-              name="title"
-              value={fieldValues.title}
-              onChange={handleFieldChange}
-              type="text"
-              placeholder="title"
-              className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white "
-            />
-            {saveErrorMessages.title?.map((message, index) => (
-              <p key={index} className="text-m text-red-400">
-                {message}
-              </p>
-            ))}
+            <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+              Title
+              <input
+                name="title"
+                value={fieldValues.title}
+                onChange={handleFieldChange}
+                type="text"
+                placeholder="노래 제목을 입력해주세요."
+                className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              />
+              {saveErrorMessages.title?.map((message, index) => (
+                <p key={index} className="text-m text-red-400">
+                  {message}
+                </p>
+              ))}
+            </label>
           </div>
 
-          <div className="my-3">
-            <textarea
-              name="singer"
-              value={fieldValues.singer}
-              onChange={handleFieldChange}
-              placeholder="singer"
-              className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white "
-            />
-            {saveErrorMessages.title?.map((message, index) => (
-              <p key={index} className="text-m text-red-400">
-                {message}
-              </p>
-            ))}
+          <div className="my-3 block uppercase tracking-wide text-gray-700 text-lg font-bold mb-2">
+            <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+              Artist
+              <textarea
+                name="singer"
+                value={fieldValues.singer}
+                onChange={handleFieldChange}
+                placeholder="가수 이름을 입력해주세요."
+                className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              />
+              {saveErrorMessages.title?.map((message, index) => (
+                <p key={index} className="text-m text-red-400">
+                  {message}
+                </p>
+              ))}
+            </label>
           </div>
 
-          <div>
-            <textarea
-              name="content"
-              value={fieldValues.content}
-              onChange={handleFieldChange}
-              className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-500 rounded mb-3 leading-loose focus:outline-none focus:bg-white pb-40 pl-2"
-              placeholder="content"
-            />
-            {saveErrorMessages.content?.map((message, index) => (
-              <p key={index} className="text-m text-red-400">
-                {message}
-              </p>
-            ))}
+          <div className="my-3 block uppercase tracking-wide text-gray-700 text-lg font-bold mb-2">
+            <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+              Content
+              <textarea
+                name="content"
+                value={fieldValues.content}
+                onChange={handleFieldChange}
+                className="h-80 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                placeholder="가사를 입력해주세요."
+              />
+              {saveErrorMessages.content?.map((message, index) => (
+                <p key={index} className="text-m text-red-400">
+                  {message}
+                </p>
+              ))}
+            </label>
           </div>
 
           <div className="my-3">
             <input
               type="file"
               accept=".png, .jpg, .jpeg"
-              name="photo"
+              name="album_photo"
               onChange={handleFieldChange}
-              placeholder="photo"
+              placeholder="album_photo"
             />
-            {saveErrorMessages.photo?.map((photo, index) => (
+            {saveErrorMessages.album_photo?.map((photo, index) => (
+              <p key={index} className="text-xs text-red-400">
+                {photo}
+              </p>
+            ))}
+          </div>
+          <div className="my-3">
+            <input
+              type="file"
+              accept=".png, .jpg, .jpeg"
+              name="singer_photo"
+              onChange={handleFieldChange}
+              placeholder="singer_photo"
+            />
+            {saveErrorMessages.singer_photo?.map((photo, index) => (
               <p key={index} className="text-xs text-red-400">
                 {photo}
               </p>
             ))}
           </div>
 
-          <div className="my-3 appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white ">
+          <div className="inline-block relative w-64">
             <select
               name="mood"
               value={fieldValues.mood}
               onChange={handleFieldChange}
               disabled={getLoading}
-              className="overflow-scroll flex "
+              className="my-3 uppercase tracking-wide text-gray-700 text-m font-bold mb-3 overflow-scroll flex "
             >
               <option>hiphop</option>
               <option>sad</option>
@@ -149,6 +172,15 @@ function MusicForm({ musicId, handleDidSave }) {
                 {message}
               </p>
             ))}
+          </div>
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+            <svg
+              className="fill-current h-4 w-4"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+            </svg>
           </div>
 
           <div>
