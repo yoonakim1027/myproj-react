@@ -15,15 +15,11 @@ const INIT_FIELD_VALUES = { title: '', content: '' };
 // articleId  : 수정
 
 function ArticleForm({ articleId, handleDidSave }) {
-  const navigate = useNavigate();
   const [auth] = useAuth();
-  // auth를 통해서 상탯값 접근이 가능
 
   // articleId 값이 있을 때에만 조회
   // articleId => manual=false
   // !articleId => manual=true
-
-  // 조회(조회의 첫번째 인자 : url(config))
   const [{ data: article, loading: getLoading, error: getError }] = useApiAxios(
     {
       url: `/news/api/articles/${articleId}/`,
@@ -41,7 +37,7 @@ function ArticleForm({ articleId, handleDidSave }) {
       error: saveError,
       errorMessages: saveErrorMessages,
     },
-    requestToken,
+    saveRequest,
   ] = useApiAxios(
     {
       url: !articleId
@@ -49,18 +45,47 @@ function ArticleForm({ articleId, handleDidSave }) {
         : `/news/api/articles/${articleId}/`,
       method: !articleId ? 'POST' : 'PUT',
       headers: {
-        // 중복 해결이 필요~ 공부가 더 필요해
         Authorization: `Bearer ${auth.access}`,
       },
     },
     { manual: true },
   );
 
-  const { fieldValues, handleFieldChange, setFieldValues, formData } =
-    useFieldValues(article || INIT_FIELD_VALUES);
+  const { fieldValues, handleFieldChange, setFieldValues } = useFieldValues(
+    article || INIT_FIELD_VALUES,
+  );
 
-  // article 조회 시에 photo 속성을 빈 문자열로 변경
   useEffect(() => {
+    // 서버로 photo=null이 전달이 되면, 아래 오류가 발생
+    //   - The submitted data was not a file. Check the encoding type on the form.
+    //   - 대응 : fieldValues에서 photo만 제거해주거나, photo=null이라면 빈 문자열로 변경
+    // setFieldValues((prevFieldValues) => ({
+    //   ...prevFieldValues,
+    //   photo: '',
+    // }));
+
+    // 인자 1개를 받는 함수를 리턴 : 원본
+    // 함수(원본) => 변경된 사본을 리턴;
+    setFieldValues(
+      produce((draft) => {
+        draft.photo = '';
+      }),
+    );
+
+    // immer 2단계
+    // setFieldValues((prevFieldValues) => {
+    //   return produce(prevFieldValues, (draft) => {
+    //     draft.photo = '';
+    //   });
+
+    // immer 3단계
+    // setFieldValues((prevFieldValues) =>
+    //   produce(prevFieldValues, (draft) => {
+    //     draft.photo = '';
+    //   }),
+    // );
+
+    // immer 4단계
     setFieldValues(
       produce((draft) => {
         draft.photo = '';
@@ -71,13 +96,24 @@ function ArticleForm({ articleId, handleDidSave }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    requestToken({
+    // fieldValues : 객체 (except 파일)
+    // 파일을 업로드할려면, FormData 인스턴스를 써야합니다.
+    const formData = new FormData();
+    Object.entries(fieldValues).forEach(([name, value]) => {
+      if (Array.isArray(value)) {
+        const fileList = value;
+        fileList.forEach((file) => formData.append(name, file));
+      } else {
+        formData.append(name, value);
+      }
+    });
+
+    saveRequest({
       data: formData,
     }).then((response) => {
-      const { savedPost } = response.data;
+      const savedPost = response.data;
       if (handleDidSave) handleDidSave(savedPost);
     });
-    navigate('/news/');
   };
 
   return (
@@ -86,9 +122,8 @@ function ArticleForm({ articleId, handleDidSave }) {
 
       {saveLoading && <LoadingIndicator>저장 중 ...</LoadingIndicator>}
 
-      {saveError?.response.status === 403 && (
-        <div className="text-red-400">로그인에 실패했습니다.</div>
-      )}
+      {saveError &&
+        `저장 중 에러가 발생했습니다. (${saveError.response?.status} ${saveError.response?.statusText})`}
       <form onSubmit={handleSubmit}>
         <div className="my-3">
           <input

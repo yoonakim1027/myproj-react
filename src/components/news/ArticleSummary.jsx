@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 function ArticleSummary({ article }) {
   return (
-    <div className="bg-gray-100 border-gray-200 border-2 rounded-lg overflow-hidden mb-10">
+    <div className="bg-gray-100 border-gray-100 border-2 rounded-lg overflow-hidden mb-10">
       {article.photo && (
         <img src={article.photo} alt={article.title} className="w-full" />
       )}
@@ -12,6 +12,7 @@ function ArticleSummary({ article }) {
             {article.title}
           </Link>
         </h3>
+        <p>by {article.author.username}</p>
       </div>
     </div>
   );
