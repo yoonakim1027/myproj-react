@@ -1,8 +1,7 @@
-function PageProfile({ username }) {
+function PageProfile() {
   return (
     <div>
       <h2>Profile</h2>
-      {username}
     </div>
   );
 }

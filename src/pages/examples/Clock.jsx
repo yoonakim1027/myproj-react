@@ -26,8 +26,7 @@ function Clock() {
     <div className="clock-wrapper">
       <div class="clock">
         <p class="date">
-          {date.getFullYear()}-{date.getMonth() + 1}-{date.getDate()}{' '}
-          {WEEKDAYS[date.getDay()]}
+          {date.getMonth() + 1}-{date.getDate()} {WEEKDAYS[date.getDay()]}
         </p>
         {/* <p class="time">{date.toLocaleTimeString('en-us')}</p> */}
         <p class="time">

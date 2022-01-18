@@ -1,8 +1,4 @@
 import TopNav from 'components/TopNav';
-
-// import Login from 'pages/accounts/Login';
-// import Profile from 'pages/accounts/Profile';
-
 // Review
 import ReviewForm from 'pages/reviews/ReviewForm';
 import ReviewList from 'pages/reviews/ReviewList';
@@ -25,6 +21,10 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import './App.css';
 import PageMusicList from 'pages/music/PageMusicList';
+import PageMusicDetail from 'pages/music/PageMusicDetail';
+import PageMusicForm from 'pages/music/PageMusicForm';
+import PageLogin from 'pages/accounts/PageLogin';
+import PageProfile from 'pages/accounts/PageProfile';
 
 // import Components from 'pages/examples/Components';
 // import CssModule from 'pages/examples/CssModule';
@@ -60,23 +60,26 @@ function App() {
           />
 
           <Route path="/music/" element={<PageMusicList />} />
+          <Route path="/music/:musicId/" element={<PageMusicDetail />} />
+          <Route path="/music/new/" element={<PageMusicForm />} />
+          <Route path="/music/:musicId/edit/" element={<PageMusicForm />} />
 
           {/* :가 붙어야 주소가 매칭이된다  -> 이렇게 렌더링*/}
+
+          <Route path="/accounts/login/" element={<PageLogin />} />
+          <Route path="/accounts/profile/" element={<PageProfile />} />
 
           {/* <Route
             path="/examples/context-api-sample2/"
             element={<ContextApiSample2 />}
-          />
-
-          <Route path="/accounts/login/" element={<Login />} />
-          <Route path="/accounts/profile/" element={<Profile />} />
-          <Route path="/examples/components/" element={<Components />} />
+          /> */}
+          {/* <Route path="/examples/components/" element={<Components />} />
           <Route path="/examples/cssmodule/" element={<CssModule />} />
           <Route path="/examples/cssinjs/" element={<CssInJs />} />
           <Route
             path="/examples/context-api-sample/"
             element={<ContextAPISample />}
-          /> */}
+          />  */}
         </Routes>
         <hr />
         윈도우 가로크기 : {windowWidth}px
