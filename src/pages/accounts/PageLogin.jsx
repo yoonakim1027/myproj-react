@@ -4,22 +4,9 @@
 // PageLogin컴포넌트 내에서,
 // fieldValues 상탯값을 노출
 
-// import Account from 'components/accounts/Account';
 import LoginForm from 'components/accounts/LoginForm';
-import { useNavigate, useParams } from 'react-router-dom';
 
 function PageLogin() {
-  const navigate = useNavigate();
-  const { username } = useParams();
-
-  return (
-    // <Account
-    //   username={username}
-    //   handleDidSave={(savedPost) =>
-    //     navigate(`/accounts/profile/${savedPost.id}/`)
-    //   }
-    // />
-    <LoginForm />
-  );
+  return <LoginForm />;
 }
 export default PageLogin;

@@ -1,18 +1,17 @@
-import H2 from 'components/H2';
 import Button from 'components/Button';
 import DebugStates from 'components/DebugStates';
 import { useApiAxios } from 'api/base';
+import useAuth from 'hooks/useAuth';
 import useFieldValues from 'hooks/useFieldValues';
 import { useNavigate } from 'react-router-dom';
-import useAuth from 'hooks/useAuth';
 
 const INITIAL_FIELD_VALUES = { username: '', password: '' };
 
 function LoginForm() {
   const navigate = useNavigate();
 
-  // 두번째 인자는 초깃값
-  const [auth, , login] = useAuth();
+  const [auth, _, login] = useAuth();
+
   const [{ loading, error }, requestToken] = useApiAxios(
     {
       url: '/accounts/api/token/',
@@ -26,14 +25,13 @@ function LoginForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // then -> 응답의 상태코드가 400미만일 경우? then에 지정된 함수가 호출이 된다
+
     requestToken({ data: fieldValues }).then((response) => {
       const { access, refresh, username, first_name, last_name } =
         response.data;
       // TODO: access/refresh token을 브라우저 어딘가에 저장해야 합니다.
       // 저장해서 페이지 새로고침이 발생하더라도 그 token이 유실되지 않아야 합니다.
       login({
-        // setAuth에 오브젝트로 넣은 것
         access,
         refresh,
         username,
@@ -48,12 +46,14 @@ function LoginForm() {
       console.log('last_name :', last_name);
 
       // 인증 후, 이동할 주소를 지정합니다.
+      navigate('/');
     });
   };
 
   return (
     <div>
-      <h2>Login</h2>
+      <h2 className="text-center pb-3"> 🐹 Login </h2>
+      <hr />
 
       {error?.response?.status === 401 && (
         <div className="text-red-400">로그인에 실패했습니다.</div>
@@ -87,4 +87,5 @@ function LoginForm() {
     </div>
   );
 }
+
 export default LoginForm;
