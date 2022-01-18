@@ -10,9 +10,7 @@ function PagePostList() {
     <>
       <div>
         <hr />
-        <h2 className="my-3 text-xl md:w-32 lg:w-48 text-center">
-          🐼 Post List 🐰
-        </h2>
+        <h2 className="my-3 text-xl md:w-32 lg:w-60">🐼Post List🐰</h2>
         <div className="text-center">
           <Button onClick={() => navigate('/blog/new/')}>새 글 쓰기</Button>
         </div>

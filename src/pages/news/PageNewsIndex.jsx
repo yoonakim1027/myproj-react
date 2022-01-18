@@ -8,7 +8,7 @@ function PageNewsIndex() {
   // 뉴스 페이지의 대문 페이지
   return (
     <div className="w-full">
-      <h2 className="my-3">뉴스 대문 페이지</h2>
+      <h2 className="text-center pb-3"> 🐱 News </h2>
       <hr />
       <div className="my-3 text-right">
         <Button type="green" onClick={() => navigate('/news/new/')}>

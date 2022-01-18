@@ -82,7 +82,7 @@ function PostForm({ postId, handleDidSave }) {
         const savedPost = response.data;
         if (handleDidSave) handleDidSave(savedPost);
       });
-      navigate(`/blog/${post.id}`);
+      navigate(`/blog/${post.id}/`);
     }
   };
 

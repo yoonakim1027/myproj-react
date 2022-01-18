@@ -25,6 +25,7 @@ import PageMusicDetail from 'pages/music/PageMusicDetail';
 import PageMusicForm from 'pages/music/PageMusicForm';
 import PageLogin from 'pages/accounts/PageLogin';
 import PageProfile from 'pages/accounts/PageProfile';
+import PageSignupForm from 'pages/accounts/PageSignupForm';
 
 // import Components from 'pages/examples/Components';
 // import CssModule from 'pages/examples/CssModule';
@@ -68,6 +69,7 @@ function App() {
 
           <Route path="/accounts/login/" element={<PageLogin />} />
           <Route path="/accounts/profile/" element={<PageProfile />} />
+          <Route path="/accounts/signup/" element={<PageSignupForm />} />
 
           {/* <Route
             path="/examples/context-api-sample2/"
