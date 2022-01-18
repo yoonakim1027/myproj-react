@@ -4,16 +4,15 @@ import DebugStates from 'components/DebugStates';
 import { useApiAxios } from 'api/base';
 import useFieldValues from 'hooks/useFieldValues';
 import { useNavigate } from 'react-router-dom';
-import useLocalStorage from 'hooks/useLocalStorage';
+import useAuth from 'hooks/useAuth';
+
 const INITIAL_FIELD_VALUES = { username: '', password: '' };
-const INITIAL_AUTH = { isLoggedIn: false }; // 이 속성을 거짓으로!
 
 function LoginForm() {
   const navigate = useNavigate();
 
   // 두번째 인자는 초깃값
-  const [auth, setAuth] = useLocalStorage('auth', INITIAL_AUTH);
-
+  const [auth, setAuth] = useAuth();
   const [{ loading, error }, requestToken] = useApiAxios(
     {
       url: '/accounts/api/token/',

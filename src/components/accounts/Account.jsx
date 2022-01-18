@@ -13,9 +13,10 @@ function Account({ username }) {
   const navigate = useNavigate();
   const { fieldValues, handleFieldChange, formData, handleDidSave } =
     useFieldValues(username || INIT_FIELD_VALUES);
-
+  // 데이터가 저장된 곳은 fieldValues
   const [
     {
+      data: user,
       loading: saveLoading,
       error: saveError,
       errorMessages: saveErrorMessages,
@@ -41,10 +42,10 @@ function Account({ username }) {
       data: formData,
     }).then((response) => {
       // 성공을 하면 promise -> then을 반환 / 에러면 .catch
-
+      // then으로 받은 데이터를 저장
       const savedPost = response.data;
       if (handleDidSave) handleDidSave(savedPost);
-      return savedPost;
+      navigate(`/accounts/profile/${user.id}/`);
     });
   }; // 에러는 위에서 상탯값으로 받기로 했기 때문에 따로 안하는 것
 
@@ -83,11 +84,11 @@ function Account({ username }) {
               />
             </label>
           </div>
-
           <Button type="pink" onChange={handleSubmit}>
             로그인하기
           </Button>
         </form>
+
         <hr className="my-3" />
         <div className="my-3">
           <p> ID : {fieldValues.username}</p>
