@@ -12,6 +12,7 @@ function PostSummary({ post }) {
             {post.title}
           </Link>
         </h3>
+        <p> by {post.author.username}</p>
       </div>
     </div>
   );

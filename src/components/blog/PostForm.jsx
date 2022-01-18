@@ -9,14 +9,25 @@ import useFieldValues from 'hooks/useFieldValues';
 import { useApiAxios } from 'api/base';
 import { useEffect } from 'react/cjs/react.development';
 import produce from 'immer';
+import useAuth from 'hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const INIT_FIELD_VALUES = { title: '', content: '' };
 
 // !articleId : 생성
 // articleId  : 수정
 function PostForm({ postId, handleDidSave }) {
+  const [auth] = useAuth();
+  const navigate = useNavigate();
+
   const [{ data: post, loading: getLoading, error: getError }] = useApiAxios(
-    `/blog/api/posts/${postId}/`,
+    {
+      url: `/blog/api/posts/${postId}/`,
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${auth.access}`,
+      },
+    },
     { manual: !postId },
   );
 
@@ -31,6 +42,9 @@ function PostForm({ postId, handleDidSave }) {
     {
       url: !postId ? `/blog/api/posts/` : `/blog/api/posts/${postId}/`,
       method: !postId ? 'POST' : 'PUT',
+      headers: {
+        Authorization: `Bearer ${auth.access}`,
+      },
     },
     { manual: true },
   );
@@ -68,6 +82,7 @@ function PostForm({ postId, handleDidSave }) {
         const savedPost = response.data;
         if (handleDidSave) handleDidSave(savedPost);
       });
+      navigate(`/blog/${post.id}`);
     }
   };
 
@@ -77,7 +92,7 @@ function PostForm({ postId, handleDidSave }) {
         <div className="w-full mb-6">
           {saveLoading && <LoadingIndicator>저장 중 ...</LoadingIndicator>}
           {saveError &&
-            `저장 중 에러가 발생했습니다. (${saveError.response.status} ${saveError.response.statusText})`}
+            `저장 중 에러가 발생했습니다. (${saveError.response?.status} ${saveError.response.statusText})`}
 
           <form onSubmit={handleSubmit}>
             <div className="my-3 block uppercase tracking-wide text-gray-700 text-lg font-bold mb-2">
