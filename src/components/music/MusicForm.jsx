@@ -1,6 +1,6 @@
 import { useApiAxios } from 'api/base';
 import useFieldValues from 'hooks/useFieldValues';
-import { useEffect } from 'react/cjs/react.development';
+import React, { useEffect } from 'react';
 import produce from 'immer';
 import LoadingIndicator from 'components/LoadingIndicator';
 import Button from 'components/Button';

@@ -7,7 +7,7 @@ import DebugStates from 'components/DebugStates';
 import LoadingIndicator from 'components/LoadingIndicator';
 import useFieldValues from 'hooks/useFieldValues';
 import { useApiAxios } from 'api/base';
-import { useEffect } from 'react/cjs/react.development';
+import { useEffect } from 'react';
 import produce from 'immer';
 import useAuth from 'hooks/useAuth';
 import { useNavigate } from 'react-router-dom';

@@ -1,12 +1,11 @@
 import { useApiAxios } from 'api/base';
 import Button from 'components/Button';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { useEffect, useState } from 'react/cjs/react.development';
+import React, { useEffect, useState } from 'react';
 import MusicSummary from './MusicSummary';
 
 function MusicList() {
-  const navigate = useNavigate();
   const [query, setQuery] = useState('');
 
   const [{ data: musicList, loading, error }, refetch] = useApiAxios(

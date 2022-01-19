@@ -1,7 +1,6 @@
 // 현재 브라우저의 가로 크기 (px)를 반환 : 정수
 
-const { useState, useEffect } = require('react');
-
+import React, { useEffect, useState } from 'react';
 function useWindowWidth() {
   const [width, setWidth] = useState(window.innerWidth);
 

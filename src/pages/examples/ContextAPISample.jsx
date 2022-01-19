@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useState } from 'react';
+import { createContext, useContext, useReducer } from 'react';
 
 // 인자 : context에서 다룰 값의 디폴트 값
 const MessageContext = createContext();

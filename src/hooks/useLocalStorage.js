@@ -1,9 +1,6 @@
 // key : localStorage에 저장될 키 이름
 // initialValue : 키의 초기값
-
-import { useState } from 'react';
-import { useEffect } from 'react/cjs/react.development';
-
+import { useEffect, useState } from 'react';
 function useLocalStorage(key, initialValue) {
   // useState에 초깃값 지정을 안하면, undefined로 지정됨
   // useState의 초깃값으로 함수를 지정할 수 있음. 상탯값을 지정할 때(초기값) 한번 실행됨

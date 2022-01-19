@@ -3,7 +3,7 @@ import Button from 'components/Button';
 import LoadingIndicator from 'components/LoadingIndicator';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useEffect } from 'react/cjs/react.development';
+import React, { useEffect } from 'react';
 
 // Detail 페이지에서 삭제까지 구현
 function MusicDetail({ musicId }) {

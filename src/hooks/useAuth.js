@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 import useLocalStorage from './useLocalStorage';
 
 const INITIAL_AUTH = { isLoggedIn: false };

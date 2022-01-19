@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import produce from 'immer';
 import Button from 'components/Button';
 import DebugStates from 'components/DebugStates';
@@ -7,7 +7,6 @@ import LoadingIndicator from 'components/LoadingIndicator';
 import useFieldValues from 'hooks/useFieldValues';
 import { useApiAxios } from 'api/base';
 import useAuth from 'hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
 
 const INIT_FIELD_VALUES = { title: '', content: '' };
 
