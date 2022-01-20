@@ -6,15 +6,14 @@ import H2 from 'components/H2';
 import LoadingIndicator from 'components/LoadingIndicator';
 import useFieldValues from 'hooks/useFieldValues';
 import { useApiAxios } from 'api/base';
-import useAuth from 'hooks/useAuth';
-
+import { useAuthContext } from 'hooks/useAuthContext';
 const INIT_FIELD_VALUES = { title: '', content: '' };
 
 // !articleId : 생성
 // articleId  : 수정
 
 function ArticleForm({ articleId, handleDidSave }) {
-  const [auth] = useAuth();
+  const [auth] = useAuthContext();
 
   // articleId 값이 있을 때에만 조회
   // articleId => manual=false

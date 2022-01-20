@@ -33,59 +33,68 @@ import PageSignupForm from 'pages/accounts/PageSignupForm';
 // import ContextAPISample from 'pages/examples/ContextAPISample';
 // import ContextApiSample2 from 'pages/examples/ContextAPISample2';
 
+import { AuthContextProvider } from 'hooks/useAuthContext';
+
 function App() {
   const windowWidth = useWindowWidth();
 
   return (
     <>
-      <div className="app">
-        <Clock />
-        <TopNav />
-        <Routes>
-          <Route path="/" element={<Navigate to="/blog/" />} />
+      {/* app.js 전역에 Provider로 context객체의 내용을 제공함으로써 
+    Route에 element로 지정된 컴포넌트들이 전부 사용할 수 있음 */}
+      <AuthContextProvider>
+        <div className="app">
+          <Clock />
+          <TopNav />
+          <Routes>
+            <Route path="/" element={<Navigate to="/blog/" />} />
 
-          <Route path="/reviews/" element={<ReviewList />} />
-          <Route path="/reviews/new/" element={<ReviewForm />} />
+            <Route path="/reviews/" element={<ReviewList />} />
+            <Route path="/reviews/new/" element={<ReviewForm />} />
 
-          <Route path="/blog/" element={<PagePostList />} />
-          <Route path="/blog/new/" element={<PagePostForm />} />
-          <Route path="/blog/:postId/" element={<PagePostDetail />} />
-          <Route path="/blog/:postId/edit/" element={<PagePostForm />} />
+            <Route path="/blog/" element={<PagePostList />} />
+            <Route path="/blog/new/" element={<PagePostForm />} />
+            <Route path="/blog/:postId/" element={<PagePostDetail />} />
+            <Route path="/blog/:postId/edit/" element={<PagePostForm />} />
 
-          <Route path="/news/" element={<PageNewsIndex />} />
-          <Route path="/news/new/" element={<PageNewsArticleForm />} />
-          <Route path="/news/:articleId/" element={<PageNewsArticleDetail />} />
-          <Route
-            path="/news/:articleId/edit/"
-            element={<PageNewsArticleForm />}
-          />
+            <Route path="/news/" element={<PageNewsIndex />} />
+            <Route path="/news/new/" element={<PageNewsArticleForm />} />
+            <Route
+              path="/news/:articleId/"
+              element={<PageNewsArticleDetail />}
+            />
+            <Route
+              path="/news/:articleId/edit/"
+              element={<PageNewsArticleForm />}
+            />
 
-          <Route path="/music/" element={<PageMusicList />} />
-          <Route path="/music/:musicId/" element={<PageMusicDetail />} />
-          <Route path="/music/new/" element={<PageMusicForm />} />
-          <Route path="/music/:musicId/edit/" element={<PageMusicForm />} />
+            <Route path="/music/" element={<PageMusicList />} />
+            <Route path="/music/:musicId/" element={<PageMusicDetail />} />
+            <Route path="/music/new/" element={<PageMusicForm />} />
+            <Route path="/music/:musicId/edit/" element={<PageMusicForm />} />
 
-          {/* :가 붙어야 주소가 매칭이된다  -> 이렇게 렌더링*/}
+            {/* :가 붙어야 주소가 매칭이된다  -> 이렇게 렌더링*/}
 
-          <Route path="/accounts/login/" element={<PageLogin />} />
-          <Route path="/accounts/profile/" element={<PageProfile />} />
-          <Route path="/accounts/signup/" element={<PageSignupForm />} />
+            <Route path="/accounts/login/" element={<PageLogin />} />
+            <Route path="/accounts/profile/" element={<PageProfile />} />
+            <Route path="/accounts/signup/" element={<PageSignupForm />} />
 
-          {/* <Route
+            {/* <Route
             path="/examples/context-api-sample2/"
             element={<ContextApiSample2 />}
           /> */}
-          {/* <Route path="/examples/components/" element={<Components />} />
+            {/* <Route path="/examples/components/" element={<Components />} />
           <Route path="/examples/cssmodule/" element={<CssModule />} />
           <Route path="/examples/cssinjs/" element={<CssInJs />} />
           <Route
             path="/examples/context-api-sample/"
             element={<ContextAPISample />}
           />  */}
-        </Routes>
-        <hr />
-        윈도우 가로크기 : {windowWidth}px
-      </div>
+          </Routes>
+          <hr />
+          윈도우 가로크기 : {windowWidth}px
+        </div>
+      </AuthContextProvider>
       <Routes>
         <Route path="/examples/clock/" element={<Clock />} />
       </Routes>

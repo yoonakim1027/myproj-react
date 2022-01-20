@@ -1,4 +1,4 @@
-import useAuth from 'hooks/useAuth';
+import { useAuthContext } from 'hooks/useAuthContext';
 import { NavLink } from 'react-router-dom';
 
 function TopNav() {
@@ -14,7 +14,7 @@ function TopNav() {
   // 해결 방법은? context API, Redux 사용
   // 부모에서 자식으로 순차적으로 내려줌
   // context API :  매번 내려주지 않고도 수월하게 전달 가능
-  const [auth, , , logout] = useAuth();
+  const [auth, , , logout] = useAuthContext();
   const handleLogout = () => {
     logout(); // logout을 하면 auth 상탯값이 바뀌고 ~
   };
