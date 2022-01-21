@@ -3,7 +3,7 @@ import DebugStates from 'components/DebugStates';
 import { useApiAxios } from 'api/base';
 import useFieldValues from 'hooks/useFieldValues';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from 'hooks/useContext';
+import { useAuth } from 'contexts/AuthContext';
 
 const INITIAL_FIELD_VALUES = { username: '', password: '' };
 

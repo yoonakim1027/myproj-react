@@ -6,7 +6,7 @@ import H2 from 'components/H2';
 import LoadingIndicator from 'components/LoadingIndicator';
 import useFieldValues from 'hooks/useFieldValues';
 import { useApiAxios } from 'api/base';
-import { useAuth } from 'hooks/useContext';
+import { useAuth } from 'contexts/AuthContext';
 const INIT_FIELD_VALUES = { title: '', content: '' };
 
 // !articleId : 생성

@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { useAuth } from 'hooks/useContext';
+import { useAuth } from 'contexts/AuthContext';
 
 function TopNav() {
   // 로그인 시에 TopNav가 안바뀌는 이유

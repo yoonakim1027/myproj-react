@@ -1,5 +1,5 @@
 import DebugStates from 'components/DebugStates';
-import { useAuth } from 'hooks/useContext';
+import { useAuth } from 'contexts/AuthContext';
 
 function Profile() {
   const [auth] = useAuth();

@@ -33,7 +33,7 @@ import PageSignupForm from 'pages/accounts/PageSignupForm';
 // import ContextAPISample from 'pages/examples/ContextAPISample';
 // import ContextApiSample2 from 'pages/examples/ContextAPISample2';
 
-import { AuthContextProvider } from 'hooks/useAuthContext';
+import { AuthContextProvider } from 'contexts/AuthContext';
 
 function App() {
   const windowWidth = useWindowWidth();

@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useApiAxios } from 'api/base';
 import LoadingIndicator from 'components/LoadingIndicator';
 import Button from 'components/Button';
-import { useAuth } from 'hooks/useContext';
+import { useAuth } from 'contexts/AuthContext';
 
 function ArticleDetail({ articleId }) {
   const [auth] = useAuth();

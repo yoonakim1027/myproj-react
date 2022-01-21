@@ -9,7 +9,7 @@ import useFieldValues from 'hooks/useFieldValues';
 import { useApiAxios } from 'api/base';
 import { useEffect } from 'react';
 import produce from 'immer';
-import { useAuth } from 'hooks/useContext';
+import { useAuth } from 'contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const INIT_FIELD_VALUES = { title: '', content: '' };

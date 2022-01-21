@@ -5,7 +5,7 @@ import LoadingIndicator from 'components/LoadingIndicator';
 import Button from 'components/Button';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useAuth } from 'hooks/useContext';
+import { useAuth } from 'contexts/AuthContext';
 import DebugStates from 'components/DebugStates';
 function PostDetail({ postId }) {
   const [auth] = useAuth();
