@@ -1,11 +1,11 @@
 import ArticleSummary from './ArticleSummary';
 import DebugStates from 'components/DebugStates';
 import { useApiAxios } from 'api/base';
-import { useAuthContext } from 'hooks/useAuthContext';
+import { useAuth } from 'hooks/useContext';
 // import useAuth from 'hooks/useAuth';
 import React, { useEffect } from 'react';
 function ArticleList() {
-  const [auth] = useAuthContext();
+  const [auth] = useAuth();
 
   const [{ data: articleList, loading, error }, refetch] = useApiAxios(
     {
@@ -46,7 +46,12 @@ function ArticleList() {
           ))}
         </div>
       )}
-      <DebugStates articleList={articleList} loading={loading} error={error} />
+      <DebugStates
+        auth={auth}
+        articleList={articleList}
+        loading={loading}
+        error={error}
+      />
     </div>
   );
 }

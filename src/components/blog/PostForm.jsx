@@ -9,7 +9,7 @@ import useFieldValues from 'hooks/useFieldValues';
 import { useApiAxios } from 'api/base';
 import { useEffect } from 'react';
 import produce from 'immer';
-import useAuth from 'hooks/useAuth';
+import { useAuth } from 'hooks/useContext';
 import { useNavigate } from 'react-router-dom';
 
 const INIT_FIELD_VALUES = { title: '', content: '' };
@@ -146,6 +146,7 @@ function PostForm({ postId, handleDidSave }) {
             </div>
           </form>
           <DebugStates
+            auth={auth}
             post={post}
             getLoading={getLoading}
             getError={getError}

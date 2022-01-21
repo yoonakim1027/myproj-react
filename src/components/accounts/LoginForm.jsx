@@ -3,14 +3,14 @@ import DebugStates from 'components/DebugStates';
 import { useApiAxios } from 'api/base';
 import useFieldValues from 'hooks/useFieldValues';
 import { useNavigate } from 'react-router-dom';
-import { useAuthContext } from 'hooks/useAuthContext';
+import { useAuth } from 'hooks/useContext';
 
 const INITIAL_FIELD_VALUES = { username: '', password: '' };
 
 function LoginForm() {
   const navigate = useNavigate();
 
-  const [auth, _, login] = useAuthContext();
+  const [auth, _, login] = useAuth();
 
   const [{ loading, error }, requestToken] = useApiAxios(
     {

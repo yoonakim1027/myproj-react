@@ -1,5 +1,5 @@
-import { useAuthContext } from 'hooks/useAuthContext';
 import { NavLink } from 'react-router-dom';
+import { useAuth } from 'hooks/useContext';
 
 function TopNav() {
   // 로그인 시에 TopNav가 안바뀌는 이유
@@ -13,8 +13,10 @@ function TopNav() {
   // 이름만 같을 뿐, 다른 상탯값이라서~
   // 해결 방법은? context API, Redux 사용
   // 부모에서 자식으로 순차적으로 내려줌
+
   // context API :  매번 내려주지 않고도 수월하게 전달 가능
-  const [auth, , , logout] = useAuthContext();
+  // context API를 통해 값에 접근하게 됨
+  const [auth, , , logout] = useAuth();
   const handleLogout = () => {
     logout(); // logout을 하면 auth 상탯값이 바뀌고 ~
   };

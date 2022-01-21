@@ -3,10 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useApiAxios } from 'api/base';
 import LoadingIndicator from 'components/LoadingIndicator';
 import Button from 'components/Button';
-import { useAuthContext } from 'hooks/useAuthContext';
+import { useAuth } from 'hooks/useContext';
 
 function ArticleDetail({ articleId }) {
-  const [auth] = useAuthContext();
+  const [auth] = useAuth();
 
   const navigate = useNavigate();
 

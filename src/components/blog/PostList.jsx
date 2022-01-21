@@ -5,8 +5,10 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import React, { useEffect, useState } from 'react';
 import PostSummary from './PostSummary';
+import { useAuth } from 'hooks/useContext';
 
 function PostList() {
+  const { auth } = useAuth();
   const [{ data: postList, loading, error }, refetch] = useApiAxios(
     `/blog/api/posts/`,
     { manual: true },
@@ -50,7 +52,12 @@ function PostList() {
 
       <div>
         {debug && (
-          <DebugStates postList={postList} loading={loading} error={error} />
+          <DebugStates
+            auth={auth}
+            postList={postList}
+            loading={loading}
+            error={error}
+          />
         )}
         {console.log(debug)}
       </div>
